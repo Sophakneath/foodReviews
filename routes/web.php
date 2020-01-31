@@ -85,3 +85,6 @@ Route::get('/moreViewDessert', 'moreData@showTopViewDessert');
 Route::get('/moreRatingDessert', 'moreData@showTopRatingDessert');
 
 Route::get('/searchDessert', 'searchDishes@showDessert');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
