@@ -1,7 +1,5 @@
 *.sqlite
 *.sqlite-journal
-/storage/*.key
 /vendor
 /.idea
 /.vscode
-/.vagrant

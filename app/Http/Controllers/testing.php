@@ -15,22 +15,22 @@ class testing extends Controller
    function getData()
    {
       $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type', 'dishes.category', 'dishes.main_cat', 'dishes.country','reviewers.username','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type', 'dishes.category', 'dishes.main_cat', 'dishes.country','users.name','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
-                            ->join('reviewers','reviewers.reviewerID','=','posts.reviewerID')->get();
+                            ->join('users','users.id','=','posts.reviewerID')->get();
                             
       $tview = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'reviewers.username','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
-                            ->join('reviewers','reviewers.reviewerID','=','posts.reviewerID')
+                            ->join('users','users.id','=','posts.reviewerID')
                             ->orderBy('click_count', 'desc')
                             ->groupBy('posts.id')
                             ->get();
 
       $trating = \DB::table('posts')
-                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'reviewers.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                            ->join('dishes','dishes.dishID','=','posts.dishID')
-                           ->join('reviewers','reviewers.reviewerID','=','posts.reviewerID')
+                           ->join('users','users.id','=','posts.reviewerID')
                            ->where('posts.rating', '=', '5')->get();
 
       $restaurant = \DB::table('restaurants')->select('name','image','link')->get();
@@ -48,9 +48,9 @@ class testing extends Controller
       $limit = $request->input("limit");
       $offset = $request->input("offset");
       $trating = \DB::table('posts')
-      ->select('posts.rating','dishes.name','dishes.type','dishes.country','reviewers.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+      ->select('posts.rating','dishes.name','dishes.type','dishes.country','users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
       ->join('dishes','dishes.dishID','=','posts.dishID')
-      ->join('reviewers','reviewers.reviewerID','=','posts.reviewerID')
+      ->join('users','users.id','=','posts.reviewerID')
       ->havingRaw('r = 5')->get();
      $type = $request->input("type");
      
