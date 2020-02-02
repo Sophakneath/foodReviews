@@ -230,40 +230,69 @@
     </style>
 </head>
 <body>
+    <div class="row row1 fix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <nav class="navbar navbar-expand-lg navbar-dark bg">
+                <a href="/"><img class="bg logo navbar-brand" src="{{ asset('img/mylogo.png') }}" style="margin-right:100px;"></img></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="/"> <b> <i class="fa fa-home"></i> HOME </b></a>
+                        <a class="nav-item nav-link active" href="/myaccount"><b>MY ACCOUNT </b></a>
+                        <a class="nav-item nav-link active" href="/about"><b>ABOUT </b></a>
+                    </div>
+
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
-        <div class="row row1 fix">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <nav class="navbar navbar-expand-lg navbar-dark bg">
-                    <a href="index.html"><img class="bg logo navbar-brand" src="img/mylogo.png"></img></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav" style="margin-left: 280px;">
-                            <a class="nav-item nav-link active" href="/"> <b> <i class="fa fa-home"></i> HOME </b></a>
-                            {{-- <a class="nav-item nav-link active" href="/food"><b>FOOD </b></a>
-                            <a class="nav-item nav-link active" href="/drink"><b>DRINK </b></a>
-                            <a class="nav-item nav-link active" href="/dessertsAndBakes"><b>DESSERTS & BAKES </b></a> --}}
-                            <a class="nav-item nav-link active" href="/myaccount"><b>MY ACCOUNT </b></a>
-                            <a class="nav-item nav-link active" href="/about"><b>ABOUT </b></a>
-                            <a class="nav-item nav-link active" href="/signin"><b>SIGN IN </b></a>
-                            <a class="nav-item nav-link active" href="/signup"><b>SIGN UP </b></a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
+
         <div class="mainTitle center d-none d-md-block">
             <h5 class="mainHeader">@yield('Maintitle')</h5>
             <hr class="mainHr">
             <p class="mainDes">@yield('Subtitle')</p>
         </div>
-          
+         
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{{ asset('img/cover1.png') }}">
@@ -275,11 +304,11 @@
                 <img class="d-block w-100 cover" src="{{ asset('img/cover3.png') }}">
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"  style="margin-top:100px; margin-bottom:100px">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" style="margin-top:100px; margin-bottom:100px">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>

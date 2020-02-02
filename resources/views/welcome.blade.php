@@ -8,15 +8,6 @@
 </head>
 <body>
 
-    {{var_dump($trating)}}
-    <br>
-    <br>
-    {{var_dump($data)}}
-    <br>
-    <br>
-    @foreach($tview as $t)
-        {{var_dump($t->rating)}}
-        <br>
-    @endforeach
+    <h1>{{ var_dump($img) }}</h1>
 </body>
 </html>

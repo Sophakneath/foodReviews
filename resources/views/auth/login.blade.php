@@ -24,7 +24,7 @@
     }
     
 </style>
-<div class="container">
+<div class="container" style="margin-bottom:60px;">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card cardview" >

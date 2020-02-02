@@ -24,7 +24,7 @@
     
 </style>
 
-<div class="container" >
+<div class="container" style="margin-bottom:60px;">
     <div class="row justify-content-center" >
         <div class="col-md-12">
             <div class="card cardview">
@@ -41,8 +41,8 @@
 
                         <div class="form-group">
                                 <label for="name">{{ __('Name') }}</label>
-                                <input class="form-control cornerRadius" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                @error('name')
+                                <input class="form-control cornerRadius" id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

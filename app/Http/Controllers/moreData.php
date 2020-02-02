@@ -9,9 +9,11 @@ class moreData extends Controller
     function showData()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
-                            ->join('users','users.id','=','posts.reviewerID')->paginate(9);
+                            ->join('users','users.id','=','posts.reviewerID')
+                            ->where('posts.status','=','accepted')
+                            ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
 
@@ -21,10 +23,11 @@ class moreData extends Controller
     function showDataFood()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Food')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -35,10 +38,11 @@ class moreData extends Controller
     function showDataVeg()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Vegetarian')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -49,10 +53,11 @@ class moreData extends Controller
     function showDataMeat()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Meat Lover')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -63,10 +68,11 @@ class moreData extends Controller
     function showDataHealthy()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Healthy')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -77,10 +83,11 @@ class moreData extends Controller
     function showDataSpicy()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Spicy Lover')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -91,9 +98,10 @@ class moreData extends Controller
     function showTopView()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating', 'posts.click_count', 'dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating', 'posts.click_count', 'dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
+                            ->where('posts.status','=','accepted')
                             ->orderBy('click_count', 'desc')
                             ->groupBy('posts.id')
                             ->paginate(9);
@@ -104,10 +112,11 @@ class moreData extends Controller
     function showTopRating()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('posts.rating','=','5')
+                            ->where('posts.status','=','accepted')
                             ->paginate(16);
 
         $title = "TOP RATING DISHES";
@@ -118,10 +127,11 @@ class moreData extends Controller
     function showTopViewFood()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating', 'posts.click_count', 'dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating', 'posts.click_count', 'dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Food')
+                            ->where('posts.status','=','accepted')
                             ->orderBy('click_count', 'desc')
                             ->groupBy('posts.id')
                             ->paginate(9);
@@ -132,11 +142,12 @@ class moreData extends Controller
     function showTopRatingFood()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Food')
                             ->where('posts.rating','=','5')
+                            ->where('posts.status','=','accepted')
                             ->paginate(16);
 
         $title = "TOP RATING FOOD";
@@ -147,10 +158,11 @@ class moreData extends Controller
     function showDataDrink()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Drink')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -161,10 +173,11 @@ class moreData extends Controller
     function showDataSmo()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Smoothie')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -175,10 +188,11 @@ class moreData extends Controller
     function showDataJuice()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Juice')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -189,10 +203,11 @@ class moreData extends Controller
     function showDataEnergy()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Energy')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -203,10 +218,11 @@ class moreData extends Controller
     function showDataAlc()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Alcoholic')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -217,10 +233,11 @@ class moreData extends Controller
     function showTopViewDrink()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating', 'posts.click_count', 'dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating', 'posts.click_count', 'dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Drink')
+                            ->where('posts.status','=','accepted')
                             ->orderBy('click_count', 'desc')
                             ->groupBy('posts.id')
                             ->paginate(9);
@@ -231,11 +248,12 @@ class moreData extends Controller
     function showTopRatingDrink()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Drink')
                             ->where('posts.rating','=','5')
+                            ->where('posts.status','=','accepted')
                             ->paginate(16);
 
         $title = "TOP RATING Drink";
@@ -246,10 +264,11 @@ class moreData extends Controller
     function showDataDessert()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Dessert')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -260,10 +279,11 @@ class moreData extends Controller
     function showDataCoo()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Cookie')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -274,10 +294,11 @@ class moreData extends Controller
     function showDataCake()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Cake')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -288,10 +309,11 @@ class moreData extends Controller
     function showDataCho()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Chocolate')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -302,10 +324,11 @@ class moreData extends Controller
     function showDataIce()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Ice Cream')
+                            ->where('posts.status','=','accepted')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -317,10 +340,11 @@ class moreData extends Controller
     function showTopViewDessert()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating', 'posts.click_count', 'dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating')
+                            ->select('posts.rating', 'posts.click_count', 'dishes.name','dishes.type','dishes.country','dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Dessert')
+                            ->where('posts.status','=','accepted')
                             ->orderBy('click_count', 'desc')
                             ->groupBy('posts.id')
                             ->paginate(9);
@@ -331,11 +355,12 @@ class moreData extends Controller
     function showTopRatingDessert()
     {
         $data = \DB::table('posts')
-                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                            ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Dessert')
                             ->where('posts.rating','=','5')
+                            ->where('posts.status','=','accepted')
                             ->paginate(16);
 
         $title = "TOP RATING Dessert";

@@ -24,7 +24,7 @@ Route::get('/signin', 'testing@signin');
 
 Route::get('/signup', 'testing@signup');
 
-Route::get('/myaccount', 'testing@showMyaccount');
+Route::get('/myaccount', 'Myaccount@showMyaccount');
 
 Route::get('/SeeMore', 'moreData@showData');
 
@@ -88,3 +88,5 @@ Route::get('/searchDessert', 'searchDishes@showDessert');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+

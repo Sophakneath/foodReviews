@@ -11,11 +11,12 @@ class searchDishes extends Controller
         $name = $request->input("name");
         $mainCat = $request->input("mainCat");
         $result = \DB::table('posts')
-                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                            ->join('dishes','dishes.dishID','=','posts.dishID')
                            ->join('users','users.id','=','posts.reviewerID')
                            ->where('dishes.name', 'like', '%'.$name.'%')
                            ->where('dishes.main_Cat','=',$mainCat)
+                           ->where('posts.status','=','accepted')
                            ->get();
         
         return view('search')->with('result', $result)->with('name', $name)->with('mainCat',$mainCat);
@@ -25,11 +26,12 @@ class searchDishes extends Controller
         $name = $request->input("name");
         $type = $request->input("type");
         $result = \DB::table('posts')
-                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                            ->join('dishes','dishes.dishID','=','posts.dishID')
                            ->join('users','users.id','=','posts.reviewerID')
                            ->where('dishes.name', 'like', '%'.$name.'%')
                            ->where('dishes.category','=',$type)
+                           ->where('posts.status','=','accepted')
                            ->get();
         
         return view('searchFood')->with('result', $result)->with('name', $name)->with('type',$type);
@@ -40,11 +42,12 @@ class searchDishes extends Controller
         $name = $request->input("name");
         $type = $request->input("type");
         $result = \DB::table('posts')
-                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                            ->join('dishes','dishes.dishID','=','posts.dishID')
                            ->join('users','users.id','=','posts.reviewerID')
                            ->where('dishes.name', 'like', '%'.$name.'%')
                            ->where('dishes.type','=',$type)
+                           ->where('posts.status','=','accepted')
                            ->get();
         
         return view('searchDrink')->with('result', $result)->with('name', $name)->with('type',$type);
@@ -55,11 +58,12 @@ class searchDishes extends Controller
         $name = $request->input("name");
         $type = $request->input("type");
         $result = \DB::table('posts')
-                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.name','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
+                           ->select('posts.rating','posts.click_count','dishes.name','dishes.type','dishes.country', 'dishes.category', 'dishes.main_cat', 'users.username','posts.num_of_pp_rating', \DB::raw("posts.rating/posts.num_of_pp_rating AS r"))
                            ->join('dishes','dishes.dishID','=','posts.dishID')
                            ->join('users','users.id','=','posts.reviewerID')
                            ->where('dishes.name', 'like', '%'.$name.'%')
                            ->where('dishes.type','=',$type)
+                           ->where('posts.status','=','accepted')
                            ->get();
         
         return view('searchDessert')->with('result', $result)->with('name', $name)->with('type',$type);

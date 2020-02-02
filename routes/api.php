@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/getsuggest', 'testing@getKeySuggestion');
 
-Route::post('/signin/checkLogin', 'testing@checkLogin');
+Route::post('/editProfile', 'EditProfile@editP');
+Route::post('/myaccount/uploadPost', 'UploadPost@upload');

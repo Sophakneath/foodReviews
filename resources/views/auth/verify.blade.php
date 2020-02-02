@@ -1,10 +1,14 @@
-@extends('layouts.app')
+@extends('detailMaster')
+
+@section('title', 'My Account')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top:220px; margin-bottom:160px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <br>
+
                 <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
                 <div class="card-body">
@@ -17,8 +21,11 @@
                     {{ __('Before proceeding, please check your email for a verification link.') }}
                     {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
                 </div>
+
+                <br>
             </div>
         </div>
     </div>
 </div>
+<br><br>
 @endsection
