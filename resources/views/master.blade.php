@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>@yield('title')</title>
     <style>
@@ -33,7 +34,7 @@
             width: 100%;
         }
         .row1{
-            z-index: 1;
+            z-index: 2;
             width: 100%;
             background-color: rgba(0, 0, 0, 0.2);
             margin: 0;
@@ -187,9 +188,16 @@
         }
 
         .c {
+            transition: 0.3s;
             padding: 15px;
             margin-top: 30px;
             box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1);    
+        }
+
+        .c:hover{
+            /* border:1px solid #CD454B; */
+            margin-top:17px;
+            transition: 0.3s;
         }
 
         .c .img {
@@ -203,6 +211,16 @@
         .c .top-sec {
             margin-top: -30px;
             margin-bottom: 15px;
+        }
+
+        .abc{
+            box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1); 
+            transition: 0.3s;   
+        }
+
+        .abc:hover{
+            margin-left: 10px;
+            transition: 0.3s;   
         }
 
         .smalltitle{
@@ -226,6 +244,22 @@
             padding-bottom:2px; 
             margin-top:30px;
             margin-bottom:10px;
+        }
+
+        .rev, .rev:hover{
+            text-decoration: none;
+            color:black;
+        }
+
+        .hea{
+            margin-top: 10px;
+            box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1); 
+            transition: 0.3s;   
+        }
+
+        .hea:hover{
+            margin-top: 0px;
+            transition: 0.3s;   
         }
     </style>
 </head>
@@ -280,39 +314,9 @@
         </div>
     </div>
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <div class="mainTitle center d-none d-md-block">
-            <h5 class="mainHeader">@yield('Maintitle')</h5>
-            <hr class="mainHr">
-            <p class="mainDes">@yield('Subtitle')</p>
-        </div>
-         
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="{{ asset('img/cover1.png') }}">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100 cover" src="{{ asset('img/cover2.png') }}">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100 cover" src="{{ asset('img/cover3.png') }}">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"  style="margin-top:100px; margin-bottom:100px">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" style="margin-top:100px; margin-bottom:100px">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div> 
+    <video width="100%" id="c" loop autoplay muted>
+        <source src="{{ asset('video/cover.mp4') }}" type="video/mp4">
+    </video>
     
     @yield('content')
 

@@ -1,3 +1,6 @@
+@php
+    session_start();
+@endphp
 @extends('detailMaster')
 
 @section('title', 'My Account')
@@ -5,6 +8,16 @@
 @section('content')
 
 <style>
+    /* .ani{
+        transition: 10s;
+    } */
+
+    .mTitle, .modal-header{
+        font-family: Chalkduster;
+        text-align: center;
+        width: 100%;
+    }
+
     .label{
         margin-top:10px;
         font-size:20px;
@@ -19,17 +32,19 @@
         color: #606060;
     }
 
-    .abc{
+    .sub{
             background-color:#F0F0F0; width:100%; height:100%; border-radius:10px; text-align:center; padding-top:10px; padding-bottom:10px;
         }
 
-    .abc:hover{
-        background-color:white;
+    .sub:hover{
+        box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1); 
+        transition: 0.3s;
     }
 
     .cde:hover{
-        border:2px solid #CD454B; 
+        box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1); 
         border-radius:10px;
+        transition: 0.3s;
     }
 
     .cardview{
@@ -76,39 +91,80 @@
     top: 0;
     opacity: 0;
     }
-
-    .upload:hover{
-        background-color:gray;
-        color:white;
+    
+    .rev:hover{
+        text-decoration: none;
     }
 
+    .coupon {
+        border: 5px dashed #bbb;
+        width: 80%;
+        border-radius: 10px;
+        margin: 0 auto;
+        max-width: 600px;
+    }
+
+    .con {
+        padding: 2px 16px;
+    }
 </style>
+
 <div class="container">
 
-    {{-- @if($success != null)
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Success</strong> $success.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @php $success = null @endphp
-    @endif --}}
+    @if(isset($_SESSION['success']))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
+            @php
+                echo $_SESSION['success'];
+            @endphp
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @php session_destroy(); @endphp
+    @endif
+
+    @if(isset($_SESSION['profile']))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
+            @php
+                echo $_SESSION['profile'];
+            @endphp
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @php session_destroy(); @endphp
+    @endif
+
+    @if(isset($_SESSION['reupload']))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
+            @php
+                echo $_SESSION['reupload'];
+            @endphp
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @php session_destroy(); @endphp
+    @endif
     
     @php $uID =0 @endphp
     @foreach ($data as $d)
-    @php $uID = $d->id @endphp
+    @php $uID = $d->id; @endphp
     <div class="row">
         <div class="col-lg-6 col-md-6 offset-md-3">
             <div class="cardview card">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12 align-self-center" style="text-align:center">
-                        <img src="{{ asset('img/about/d.png') }}" alt="" class="icon">
+                        @if($d->image != null)
+                            <img src="{{ asset($d->image) }}" alt="" class="icon">
+                        @else
+                            <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon">
+                        @endif
                     </div>
                     <div class="col-lg-6 col-md-12 col-12 align-self-center" style="text-align:center">
                         <h3 class="t">{{$d->username}}</h3>
                         <h6 style="color:#606060; font-size:18px; margin-top:20px;">{{$d->email}}</h6>
-                        {{-- <button class="btn btn-outline-danger" style="margin-top:10px">Edit Profile</button> --}}
+                        <button class="btn btn-danger" style="font-size:18px; margin-top:10px; width:100%;" data-toggle="modal" data-target="#modal">Total Point : {{$d->point}}</button>
                     </div>
                 </div>
             </div>
@@ -116,11 +172,11 @@
     </div>
     @endforeach
     <br><br>
-    <div class="row" style="">
+    <div class="row">
         <div class="col-lg-12">
             <div style="width:100%; border-radius:10px;">
                 <ul class="swipetabnav nav  nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" style="overflow-x: auto;">
-                    <li class="nav-item cde" style="margin-right:10px; margin-left:10px;">
+                    <li class="nav-item cde" id="review" style="margin-right:10px; margin-left:10px;" onclick="changeState('review','write','fav','edit')">
                         <div class="item slidecat" style="padding-top:30px; padding-bottom:30px; width:200px;" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-hea" aria-selected="true">
                             <center><span class="logohelper"></span><img src="{{ asset('img/icons/reviews.png') }}" style="width:100px; display:inline-block;">
                             <br>
@@ -128,7 +184,7 @@
                             </center>
                         </div>
                     </li>
-                    <li class="nav-item cde" style="margin-right:10px; margin-left:10px;">
+                    <li class="nav-item cde" id="write" style="margin-right:10px; margin-left:10px;" onclick="changeState('write','review','fav','edit')">
                         <div class="item slidecat" style="padding-top:30px; padding-bottom:30px; width:200px;" id="pills-veg-tab" data-toggle="pill" href="#pills-veg" role="tab" aria-controls="pills-veg" aria-selected="false">
                             <center><span class="logohelper"></span><img src="{{ asset('img/icons/write.png') }}" style="width:100px; display:inline-block;">
                             <br>
@@ -136,7 +192,7 @@
                             </center>
                         </div>
                     </li>
-                    <li class="nav-item cde" style="margin-right:10px; margin-left:10px;">
+                    <li class="nav-item cde" id="fav" style="margin-right:10px; margin-left:10px;" onclick="changeState('fav','review','write','edit')">
                         <div class="item slidecat" style="padding-top:30px; padding-bottom:30px;  width:200px;" id="pills-hea-tab" data-toggle="pill" href="#pills-hea" role="tab" aria-controls="pills-on" aria-selected="false">
                             <center><span class="logohelper"></span><img src="{{ asset('img/icons/fav.png') }}" style="width:100px; display:inline-block;">
                             <br>
@@ -144,7 +200,7 @@
                             </center>
                         </div>
                     </li>  
-                    <li class="nav-item cde" style="margin-right:10px; margin-left:10px;">
+                    <li class="nav-item cde" id="edit" style="margin-right:10px; margin-left:10px;" onclick="changeState('edit','review','write','fav')">
                         <div class="item slidecat" style="padding-top:30px; padding-bottom:30px; width:200px;" id="pills-meat-tab" data-toggle="pill" href="#pills-meat" role="tab" aria-controls="pills-meat" aria-selected="false">
                             <center><span class="logohelper"></span><img src="{{ asset('img/icons/profile.png') }}" style="width:100px; display:inline-block;">
                             <br>
@@ -161,32 +217,32 @@
                 <br>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
                     <div class="container">
                         <div class="row">
-                            <ul class="swipetabnav nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" style="overflow-x: auto;">
-                                <li class="nav-item" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;">
-                                    <div class="item slidecat abc" style="padding-left:10px; padding-right:10px;  width:255px;" id="pills-any-tab" data-toggle="pill" href="#pills-any" role="tab" aria-controls="pills-any" aria-selected="true">
+                            <ul class="swipetabnav nav nav-pills mb-3 justify-content-center" id="pills-tab1" role="tablist" style="overflow-x: auto;">
+                                <li class="nav-item" id="all" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('all','pending','accepted','rejected')">
+                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;  width:255px;" id="pills-any-tab" data-toggle="pill" href="#pills-any" role="tab" aria-controls="pills-any" aria-selected="true">
                                         <span class="logohelper"></span><img src="{{ asset('img/icons/paper.png') }}" style="width:40px; display:inline-block;">
                                         <label class="categorysug">All</label>
                                     </div>
                                 </li>
-                                <li class="nav-item" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;">
-                                    <div class="item slidecat abc" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-pen-tab" data-toggle="pill" href="#pills-pen" role="tab" aria-controls="pills-pen" aria-selected="false">
+                                <li class="nav-item" id="pending" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('pending','all','accepted','rejected')">
+                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-pen-tab" data-toggle="pill" href="#pills-pen" role="tab" aria-controls="pills-pen" aria-selected="false">
                                         <span class="logohelper"></span><img src="{{ asset('img/icons/refresh.png') }}" style="width:40px; display:inline-block;">
                                         <label class="categorysug">Pending</label>
                                     </div>
                                 </li>
-                                <li class="nav-item" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;">
-                                    <div class="item slidecat abc" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-acc-tab" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-acc" aria-selected="false">
+                                <li class="nav-item" id="accepted" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('accepted','all','pending','rejected')">
+                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-acc-tab" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-acc" aria-selected="false">
                                         <span class="logohelper"></span><img src="{{ asset('img/icons/correct.png') }}" style="width:40px; display:inline-block;">
                                         <label class="categorysug">Accepted</label>
                                     </div>
                                 </li>
-                                <li class="nav-item" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;">
-                                    <div class="item slidecat abc" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-rej-tab" data-toggle="pill" href="#pills-rej" role="tab" aria-controls="pills-rej" aria-selected="false">
+                                <li class="nav-item" id="rejected" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('rejected','all','pending','accepted')">
+                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-rej-tab" data-toggle="pill" href="#pills-rej" role="tab" aria-controls="pills-rej" aria-selected="false">
                                         <span class="logohelper"></span><img src="{{ asset('img/icons/quit.png') }}" style="width:40px; display:inline-block;">
                                         <label class="categorysug">Rejected</label>
                                     </div>
@@ -195,231 +251,92 @@
 
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-any" role="tabpanel" aria-labelledby="pills-any-tab">
-                                    <div class="row" style="margin-top:20px;">
-                                    @foreach($myReview as $d)
-                                        @php $rating = $d->rating; @endphp
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom:20px;">
-                                            <div class="card c" style="background-color:white;">
-                                                <div class="top-sec">
-                                                    <img class="img" src="{{ asset('img/cover1.png') }}">
-                                                </div>
-                                                <br>
-                                                <div class="container">
-                                                    <div class="bottom-sec">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
-                                                            </div>
-                                                        </div>
-                                                    
-                                                        <br>
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            <img src="{{ asset('img/icons/spoon.png') }}" style="width:25px; height:25px;">
-                                                            @if($d->main_cat == "Food")
-                                                                <label class="categorysug">&nbsp;Category : {{$d->category}}</label>
-                                                            @else
-                                                                <label class="categorysug">&nbsp;Category : {{$d->type}}</label>
-                                                            @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            <img src="{{ asset('img/icons/location.png') }}" style="width:25px; height:25px;">
-                                                            <label class="categorysug">&nbsp;Country : {{$d->country}}</label>
-                                                            </div>
-                                                        </div>   
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            @if($d->status == "accepted")
-                                                                <img src="{{ asset('img/icons/correct.png') }}" style="width:25px; height:25px;">
-                                                            @elseif($d->status == "rejected")
-                                                                <img src="{{ asset('img/icons/quit.png') }}" style="width:25px; height:25px;">
-                                                            @else
-                                                                <img src="{{ asset('img/icons/refresh.png') }}" style="width:25px; height:25px;">
-                                                            @endif
-                                                            <label class="categorysug">&nbsp;Status : {{$d->status}}</label>
-                                                            </div>
-                                                        </div> 
-                                                        <br>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    </div>
+                                    @include('widgets.myreview',['item'=>$myReview])
                                 </div>
                                 <div class="tab-pane fade" id="pills-pen" role="tabpanel" aria-labelledby="pills-pen-tab">
-                                    <div class="row" style="margin-top:20px;">
-                                    @foreach($pending as $d)
-                                        @php $rating = $d->rating; @endphp
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom:20px;">
-                                            <div class="card c" style="background-color:white;">
-                                                <div class="top-sec">
-                                                    <img class="img" src="{{ asset('img/cover1.png') }}">
-                                                </div>
-                                                <br>
-                                                <div class="container">
-                                                    <div class="bottom-sec">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
-                                                            </div>
-                                                        </div>
-                                                    
-                                                        <br>
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            <img src="{{ asset('img/icons/spoon.png') }}" style="width:25px; height:25px;">
-                                                            @if($d->main_cat == "Food")
-                                                                <label class="categorysug">&nbsp;Category : {{$d->category}}</label>
-                                                            @else
-                                                                <label class="categorysug">&nbsp;Category : {{$d->type}}</label>
-                                                            @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            <img src="{{ asset('img/icons/location.png') }}" style="width:25px; height:25px;">
-                                                            <label class="categorysug">&nbsp;Country : {{$d->country}}</label>
-                                                            </div>
-                                                        </div>   
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            @if($d->status == "accepted")
-                                                                <img src="{{ asset('img/icons/correct.png') }}" style="width:25px; height:25px;">
-                                                            @elseif($d->status == "rejected")
-                                                                <img src="{{ asset('img/icons/quit.png') }}" style="width:25px; height:25px;">
-                                                            @else
-                                                                <img src="{{ asset('img/icons/refresh.png') }}" style="width:25px; height:25px;">
-                                                            @endif
-                                                            <label class="categorysug">&nbsp;Status : {{$d->status}}</label>
-                                                            </div>
-                                                        </div> 
-                                                        <br>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    </div>
+                                    @include('widgets.myreview',['item'=>$pending])
                                 </div>
                                 <div class="tab-pane fade" id="pills-acc" role="tabpanel" aria-labelledby="pills-acc-tab">
-                                    <div class="row" style="margin-top:20px;">
-                                    @foreach($accept as $d)
-                                        @php $rating = $d->rating; @endphp
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom:20px;">
-                                            <div class="card c" style="background-color:white;">
-                                                <div class="top-sec">
-                                                    <img class="img" src="{{ asset('img/cover1.png') }}">
-                                                </div>
-                                                <br>
-                                                <div class="container">
-                                                    <div class="bottom-sec">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
-                                                            </div>
-                                                        </div>
-                                                    
-                                                        <br>
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            <img src="{{ asset('img/icons/spoon.png') }}" style="width:25px; height:25px;">
-                                                            @if($d->main_cat == "Food")
-                                                                <label class="categorysug">&nbsp;Category : {{$d->category}}</label>
-                                                            @else
-                                                                <label class="categorysug">&nbsp;Category : {{$d->type}}</label>
-                                                            @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            <img src="{{ asset('img/icons/location.png') }}" style="width:25px; height:25px;">
-                                                            <label class="categorysug">&nbsp;Country : {{$d->country}}</label>
-                                                            </div>
-                                                        </div>   
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            @if($d->status == "accepted")
-                                                                <img src="{{ asset('img/icons/correct.png') }}" style="width:25px; height:25px;">
-                                                            @elseif($d->status == "rejected")
-                                                                <img src="{{ asset('img/icons/quit.png') }}" style="width:25px; height:25px;">
-                                                            @else
-                                                                <img src="{{ asset('img/icons/refresh.png') }}" style="width:25px; height:25px;">
-                                                            @endif
-                                                            <label class="categorysug">&nbsp;Status : {{$d->status}}</label>
-                                                            </div>
-                                                        </div> 
-                                                        <br>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    </div>
+                                    @include('widgets.myreview',['item'=>$accept])
                                 </div>
                                 <div class="tab-pane fade" id="pills-rej" role="tabpanel" aria-labelledby="pills-rej-tab">
                                     <div class="row" style="margin-top:20px;">
-                                    @foreach($reject as $d)
-                                        @php $rating = $d->rating; @endphp
-                                        <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom:20px;">
-                                            <div class="card c" style="background-color:white;">
-                                                <div class="top-sec">
-                                                    <img class="img" src="{{ asset('img/cover1.png') }}">
+                                        @if(count($reject) > 0)
+                                            @foreach($reject as $d)
+                                                @php $rating = $d->rating; @endphp
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="padding-bottom:20px;">
+                                                    <a href="/myReviewDetail?postID={{$d->id}}" class="rev">
+                                                        <div class="card c" style="background-color:white;">
+                                                            <div class="top-sec">
+                                                                <img class="img" src="{{ asset($d->cover) }}" style="height:180px; object-fit:cover">
+                                                            </div>
+                                                            <br>
+                                                            <div class="container">
+                                                                <div class="bottom-sec">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
+                                                                        </div>
+                                                                    </div>
+                                                                
+                                                                    <br>
+                                                                    <div class="row" style="margin-top: 5px;">
+                                                                        <div class="col-12">
+                                                                        <img src="{{ asset('img/icons/spoon.png') }}" style="width:25px; height:25px;">
+                                                                        @if($d->main_cat == "Food")
+                                                                            <label class="categorysug">&nbsp;Category : {{$d->category}}</label>
+                                                                        @else
+                                                                            <label class="categorysug">&nbsp;Category : {{$d->type}}</label>
+                                                                        @endif
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row" style="margin-top: 5px;">
+                                                                        <div class="col-12">
+                                                                        <img src="{{ asset('img/icons/location.png') }}" style="width:25px; height:25px;">
+                                                                        <label class="categorysug">&nbsp;Country : {{$d->country}}</label>
+                                                                        </div>
+                                                                    </div>   
+                                                                    <div class="row" style="margin-top: 5px;">
+                                                                        <div class="col-12">
+                                                                        @if($d->status == "accepted")
+                                                                            <img src="{{ asset('img/icons/correct.png') }}" style="width:25px; height:25px;">
+                                                                        @elseif($d->status == "rejected")
+                                                                            <img src="{{ asset('img/icons/quit.png') }}" style="width:25px; height:25px;">
+                                                                        @else
+                                                                            <img src="{{ asset('img/icons/refresh.png') }}" style="width:25px; height:25px;">
+                                                                        @endif
+                                                                        <label class="categorysug">&nbsp;Status : {{ strtoupper($d->status) }}</label>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="row" style="margin-top: 25px;">
+                                                                        <div class="col-lg-6 col-6 col-sm-6" style="text-align:right">
+                                                                            <form method="get" action="/myaccount/editpost">
+                                                                                <input type="hidden" value="{{$d->id}}" name="postID">
+                                                                                <button class="btn btn-danger" style="margin-left:10px; margin-right:10px;" type="submit">Edit Post</button>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-6 col-sm-6" style="text-align:left">
+                                                                            <form method="get" action="/myaccount/resubmit">
+                                                                                <input type="hidden" value="{{$d->id}}" name="postID">
+                                                                                <button class="btn btn-primary" style="margin-left:10px; margin-right:10px;" type="submit" onclick="return confirm('Are you sure you want to resubmit without edit it?')">Resubmit</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                    <br>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                                <br>
-                                                <div class="container">
-                                                    <div class="bottom-sec">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
-                                                            </div>
-                                                        </div>
-                                                    
-                                                        <br>
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            <img src="{{ asset('img/icons/spoon.png') }}" style="width:25px; height:25px;">
-                                                            @if($d->main_cat == "Food")
-                                                                <label class="categorysug">&nbsp;Category : {{$d->category}}</label>
-                                                            @else
-                                                                <label class="categorysug">&nbsp;Category : {{$d->type}}</label>
-                                                            @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            <img src="{{ asset('img/icons/location.png') }}" style="width:25px; height:25px;">
-                                                            <label class="categorysug">&nbsp;Country : {{$d->country}}</label>
-                                                            </div>
-                                                        </div>   
-                                                        <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-12">
-                                                            @if($d->status == "accepted")
-                                                                <img src="{{ asset('img/icons/correct.png') }}" style="width:25px; height:25px;">
-                                                            @elseif($d->status == "rejected")
-                                                                <img src="{{ asset('img/icons/quit.png') }}" style="width:25px; height:25px;">
-                                                            @else
-                                                                <img src="{{ asset('img/icons/refresh.png') }}" style="width:25px; height:25px;">
-                                                            @endif
-                                                            <label class="categorysug">&nbsp;Status : {{$d->status}}</label>
-                                                            </div>
-                                                        </div> 
-                                                        <div class="row" style="margin-top: 25px;">
-                                                            <div class="col-12">
-                                                                <center>
-                                                                <button class="btn btn-danger" style="margin-left:10px; margin-right:10px;">Edit Post</button>
-                                                                <button class="btn btn-primary" style="margin-left:10px; margin-right:10px;">Resubmit</button>
-                                                                </center>
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                    </div>
-                                                </div>
+                                            @endforeach
+                                        @else
+                                            <div class="col-lg-12" style="text-align:center;">
+                                                <img src="{{asset('img/icons/notfound.png')}}" style="width:400px;">
                                             </div>
-                                        </div>
-                                    @endforeach
+                                            <div class="col-lg-12" style="text-align:center;">
+                                                <h3 style="color:#606060; font-size:20px;">No Rejected Posts</h3>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -461,24 +378,24 @@
                                                         <label for="exampleInputEmail1">Category</label>
                                                         <select class="form-control" id="food" name="food" style="border-radius:5px">
                                                             <option value="Vegetarian">Vegetarian</option>
-                                                            <option value="Vegetarian">Meat Lover</option>
-                                                            <option value="Vegetarian">Healthy</option>
-                                                            <option value="Vegetarian">Spicy Lover</option>
-                                                            <option value="Vegetarian">Other</option>
+                                                            <option value="Meat Lover">Meat Lover</option>
+                                                            <option value="Healthy">Healthy</option>
+                                                            <option value="Spicy Lover">Spicy Lover</option>
+                                                            <option value="Other">Other</option>
                                                         </select>
                                                         <select class="form-control" id="drink" name="drink" style="border-radius:5px" hidden>
-                                                            <option value="Vegetarian">Smoothie</option>
-                                                            <option value="Vegetarian">Juice</option>
-                                                            <option value="Vegetarian">Energy Drink</option>
-                                                            <option value="Vegetarian">Alcoholic Lover</option>
-                                                            <option value="Vegetarian">Other</option>
+                                                            <option value="Smoothie">Smoothie</option>
+                                                            <option value="Juice">Juice</option>
+                                                            <option value="Energy Drink">Energy Drink</option>
+                                                            <option value="Alcoholic">Alcoholic</option>
+                                                            <option value="Other">Other</option>
                                                         </select>
                                                         <select class="form-control" id="dessert" name="dessert" style="border-radius:5px" hidden>
-                                                            <option value="Vegetarian">Cookie</option>
-                                                            <option value="Vegetarian">Cake</option>
-                                                            <option value="Vegetarian">Chocolate</option>
-                                                            <option value="Vegetarian">Ice Cream</option>
-                                                            <option value="Vegetarian">Other</option>
+                                                            <option value="Cookie">Cookie</option>
+                                                            <option value="Cake">Cake</option>
+                                                            <option value="Chocolate">Chocolate</option>
+                                                            <option value="Ice Cream">Ice Cream</option>
+                                                            <option value="Other">Other</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -564,7 +481,7 @@
                                             <br>
                                             <div class="row">
                                                 <div class="col-lg-12  align-self-center">
-                                                <button type="submit" class="btn btn-danger" name="submit" style="border-radius:20px; width:150px;">SUBMIT</button>
+                                                    <button type="submit" class="btn btn-danger" name="submit" style="width:150px;">SUBMIT</button>
                                                 </div>
                                             </div>
 
@@ -577,19 +494,115 @@
                 </div>
                 
                 <div class="tab-pane fade" id="pills-hea" role="tabpanel" aria-labelledby="pills-hea-tab">
-                        
+                    <div class="row" id="fav-container">
+                        @if(count($saves) > 0)
+                            @foreach($saves as $d)
+                                @php $rating = $d->rating; @endphp
+                                <div id="item{{$d->saveID}}" class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom:20px;">
+                                    <div class="card c" style="background-color:white;">
+                                        <a href="/reviewDetail?postID={{$d->id}}&name={{$d->name}}" class="rev">
+                                        <div class="top-sec">
+                                            <img class="img" src="{{ asset($d->cover) }}" style="height:180px; object-fit:cover">
+                                        </div>
+                                        </a>
+                                    <br>
+                                    <div class="container">
+                                        <div class="bottom-sec">
+                                            <a href="/reviewDetail?postID={{$d->id}}&name={{$d->name}}" class="rev">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <label class="categorysug" style="margin-left:0;">Reviewed by {{$d->username}}</label>
+                                                    </div>
+                                                </div> 
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <label class="categorysug" style="margin-left:0;">Viewer : {{$d->click_count}}</label>
+                                                    </div>
+                                                </div> 
+                                                <br>
+                                                <div class="row" style="margin-top: 5px;">
+                                                    <div class="col-12">
+                                                    <img src="{{ asset('img/icons/spoon.png') }}" style="width:25px; height:25px;">
+                                                    @if($d->main_cat == "Food")
+                                                        <label class="categorysug">&nbsp;Category : {{$d->category}}</label>
+                                                    @else
+                                                        <label class="categorysug">&nbsp;Category : {{$d->type}}</label>
+                                                    @endif
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin-top: 5px;">
+                                                    <div class="col-12">
+                                                    <img src="{{ asset('img/icons/location.png') }}" style="width:25px; height:25px;">
+                                                    <label class="categorysug">&nbsp;Country : {{$d->country}}</label>
+                                                    </div>
+                                                </div>   
+                                                <br>
+                                            </a>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                                        @foreach(range(1,5) as $i)
+                                                        <span class="fa-stack" style="width:1em">
+                                                            
+                                                            @if($rating >0)
+                                                                @if($rating >0.5)
+                                                                    <i class="fa fa-star fa-stack-1x" style="font-size: 18px; color:#FFE200;"></i>
+                                                                @else
+                                                                    <i class="fa fa-star-half fa-stack-1x" style="font-size: 18px; color:#FFE200;"></i>
+                                                                @endif
+                                                            @else
+                                                                <i class="fa fa-star fa-stack-1x"></i>
+                                                            @endif
+                                                            @php $rating--; @endphp
+                                                        </span>
+                                                        @endforeach
+                    
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-4" style=" text-align:center; height:100%;  ">
+                                                        <label class="categorysug" style="background-color:#FFE200; border-radius:5px; color:white; width:100%; margin-left:0; padding-top:2px; padding-bottom:2px;">{{ round($d->rating,2) }}</label>
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-sm-2 col-2">
+                                                        {{-- <form method="GET" action="" onsubmit=""> --}}
+                                                            <input type="hidden" value="{{$d->saveID}}" name="saveID" id="saveID">
+                                                            <i class="fa fa-heart" style="font-size:30px; width:100%; text-align:right; color:#CD454B" onclick="submitWithoutReload()"></i>
+                                                        {{-- </form> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="col-lg-12" style="text-align:center;">
+                                <img src="{{asset('img/icons/notfound.png')}}" style="width:400px;">
+                            </div>
+                            <div class="col-lg-12" style="text-align:center;">
+                                <h3 style="color:#606060; font-size:20px;">No Favourite Posts</h3>
+                            </div>
+                        @endif
+                    </div>    
                 </div>
 
                 <div class="tab-pane fade" id="pills-meat" role="tabpanel" aria-labelledby="pills-meat-tab">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form method="post" action="{{ url('/api/editProfile')}}">
+                                <form method="post" action="{{ url('/api/editProfile')}}" enctype="multipart/form-data">
                                 <div class="card cardview">
                                     @foreach ($data as $d)
                                     <div class="row">
                                         <div class="col-lg-6 align-self-center" style="text-align:center">
-                                            <img src="{{ asset('img/icons/account.png') }}" alt="" class="icon1" id="pro">
+                                            @if($d->image != null)
+                                                <img src="{{ asset($d->image) }}" alt="" class="icon1" id="pro">
+                                            @else
+                                                <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon1" id="pro">
+                                            @endif
+                                            
                                             <br>
                                             <div class="upload-btn-wrapper" style="margin-top:20px;">
                                                 <button class="upload">Upload a file</button>
@@ -616,7 +629,7 @@
                                             <br>
                                             <div class="row">
                                                 <div class="col-lg-12  align-self-center">
-                                                <button type="submit" class="btn btn-danger" style="border-radius:20px; width:150px;">UPDATE</button>
+                                                <button type="submit" class="btn btn-danger" style="border-radius:5px; width:150px;">UPDATE</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -632,8 +645,106 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="mTitle" id="exampleModalLabel" style="color: rgb(230, 100, 100); margin-top: 10px;">REWARD DETAIL</h5>
+        </div>
+        <div class="container">
+            <div class="modal-body">
+                <br>
+                <div class="row">
+                    <div class="col-lg-6" style="margin-bottom:20px;">
+                        <div class="coupon">
+                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <div class="con" style="background-color:white">
+                              <h5><b>20% OFF FROM THE PIZZA COMPANY</b></h5> 
+                              <p>Redeem Your Reward With 200 Points.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-bottom:20px;">
+                        <div class="coupon">
+                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <div class="con" style="background-color:white">
+                              <h5><b>30% OFF FROM KOI THE CAMBODIA</b></h5> 
+                              <p>Redeem Your Reward With 300 Points.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" style="margin-bottom:20px;">
+                        <div class="coupon">
+                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <div class="con" style="background-color:white">
+                              <h5><b>20% OFF FROM THE PIZZA COMPANY</b></h5> 
+                              <p>Redeem Your Reward With 200 Points.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-bottom:20px;">
+                        <div class="coupon">
+                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <div class="con" style="background-color:white">
+                              <h5><b>30% OFF FROM KOI THE CAMBODIA</b></h5> 
+                              <p>Redeem Your Reward With 300 Points.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" style="margin-bottom:20px;">
+                        <div class="coupon">
+                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <div class="con" style="background-color:white">
+                              <h5><b>20% OFF FROM THE PIZZA COMPANY</b></h5> 
+                              <p>Redeem Your Reward With 200 Points.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-bottom:20px;">
+                        <div class="coupon">
+                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <div class="con" style="background-color:white">
+                              <h5><b>30% OFF FROM KOI THE CAMBODIA</b></h5> 
+                              <p>Redeem Your Reward With 300 Points.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>  
+
 <br><br>
 <script>
+    $(document).ready(function()
+    {
+        $('#review').css({'box-shadow':'0 0 16px 1px rgba(0, 0, 0, 0.1)'});
+        $('#all').css({'box-shadow':'0 0 16px 1px rgba(0, 0, 0, 0.1)'});
+        $('#all').css({'border-radius':'10px'});
+    });
+
+    function changeState(a,b,c,d){
+        var c1 = document.getElementById(a);
+        var c2 = document.getElementById(b);
+        var c3 = document.getElementById(c);
+        var cc = document.getElementById(d);
+        c1.style.boxShadow = "0 0 16px 1px rgba(0, 0, 0, 0.1)"; 
+        c1.style.borderRadius = "10px"; 
+        c2.style.boxShadow = "none"; 
+        c3.style.boxShadow = "none"; 
+        cc.style.boxShadow = "none"; 
+    }
+
     function showInput()
     {
         var e = document.getElementById("main-cat");
@@ -680,7 +791,7 @@
             lsp.hidden = true;
             spi.hidden = true; 
         }
-    }  
+    } 
 
     function checkFiles(files, evt, id1, id2) {     
 
@@ -698,6 +809,28 @@
         var img=document.getElementById(id);
         img.src=URL.createObjectURL(evt.target.files[index])
     }
-  
+
+    function submitWithoutReload()
+    {
+        var id = document.getElementById('saveID').value;
+        $.ajax({
+            type: 'get',
+            url: '/myaccount/unfavourite',
+            data:
+            {
+                saveID:id
+            },
+            success:function(response)
+            {
+                var did = '#item'+id;
+                var i=0;
+                var nodata = '<div class="col-lg-12" style="text-align:center;"> <img src="{{asset("img/icons/notfound.png")}}" style="width:400px;"></div><div class="col-lg-12" style="text-align:center;"><h3 style="color:#606060; font-size:20px;">No Favourite Posts</h3></div>';
+                $(did).remove();
+                if ( $('#fav-container').children().length <= 0 ) {
+                    $('#fav-container').html(nodata);
+                }
+            }
+        });
+    }
 </script>
 @endsection

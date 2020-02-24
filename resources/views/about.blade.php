@@ -45,7 +45,6 @@
         }
 </style>
 
-<div class="container">
     <br><br>
     <div class="row" style="margin:0">
         <div class="col-lg-12">
@@ -58,16 +57,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-sm-12 col-md-12 col-12">
-                    <p style="color:#606060;">
+                    <p style="color:#606060; text-align:justify">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde delectus quo tempora, explicabo dolorem numquam ipsam porro! Eligendi quaerat recusandae maiores alias, sint aliquam laborum exercitationem, deleniti deserunt perferendis odio?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi dolorum voluptate molestias culpa harum voluptatum ducimus? Expedita, velit! Aliquid illum dicta soluta, ipsa et natus nesciunt similique repudiandae quisquam reiciendis?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi ea sapiente modi saepe molestias ipsam reprehenderit laudantium soluta rerum aspernatur, dolore ducimus architecto itaque excepturi a? Ad, perspiciatis voluptates? Ipsum.
                     </p> 
                 </div>
             </div>
         </div>
 
-        <br><br>
+        
 
-        <div class="row hov">
+        <div class="row hov1">
             <div class="container" style="padding-left:50px; padding-top:50px; padding-bottom:50px;">
                 <div class="row">
                     <div class="col-lg-6 my-auto">
@@ -99,7 +98,7 @@
             </div>
         </div>
 
-       <div class="row hov1">
+       <div class="row hov">
             <div class="container" style="padding-left:50px; padding-top:50px; padding-bottom:50px;">
                 <div class="row">
                     <div class="col-lg-6 my-auto">
@@ -128,7 +127,7 @@
             </div>
         </div>
                 
-        <div class="row hov">
+        <div class="row hov1">
             <div class="container" style="padding-left:50px; padding-top:50px; padding-bottom:50px;">
                 <div class="row">
                     <div class="col-lg-6 my-auto">
@@ -158,7 +157,7 @@
             </div>
         </div>
                 
-        <div class="row hov1">
+        <div class="row hov">
             <div class="container" style="padding-left:50px; padding-top:50px; padding-bottom:50px;">
                 <div class="row">
                     <div class="col-lg-6 my-auto">
@@ -187,7 +186,7 @@
             </div>
         </div>
 
-        <div class="row hov">
+        <div class="row hov1">
             <div class="container" style="padding-left:50px; padding-top:50px; padding-bottom:50px;">
                 <div class="row">
                     <div class="col-lg-6 my-auto">
@@ -216,8 +215,5 @@
                 </div>
             </div>
         </div>
-</div>
-
-<br><br>
 
 @endsection

@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>SeeMore</title>
+    <title>@yield('title')</title>
     <style>
         @font-face {
             font-family: Chalkduster;
@@ -24,8 +25,14 @@
             
         }
 
+        .c:hover{
+            /* border:1px solid #CD454B; */
+            margin-top:17px;
+            transition: 0.3s;
+        }
+
         .row1{
-            z-index: 1;
+            z-index: 2;
             width: 100%;
             margin: 0;
             padding-right: 0;
@@ -164,9 +171,15 @@
             font-size: 16px;
         }
 
+        .policy:hover{
+            text-decoration: none;
+            color: white;
+        }
+
         .c {
             padding: 15px;
             margin-top: 30px;
+            transition: 0.3s;
             box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1);    
         }
 
@@ -192,6 +205,7 @@
         .custom2{
             margin:0;
             padding:0;
+            
         }
 
         .toprate{
@@ -215,6 +229,19 @@
             font-size: 18px;
             color: #606060;
         }
+        .rev, .rev:hover{
+            text-decoration: none;
+            color:black;
+        }
+        .abc{
+            box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1); 
+            transition: 0.3s;   
+        }
+
+        .abc:hover{
+            margin-left: 10px;
+            transition: 0.3s;   
+        }
     </style>
 </head>
 <body>
@@ -228,9 +255,6 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-item nav-link active" href="/"> <b> <i class="fa fa-home"></i> HOME </b></a>
-                        {{-- <a class="nav-item nav-link active" href="/food"><b>FOOD </b></a>
-                        <a class="nav-item nav-link active" href="/drink"><b>DRINK </b></a>
-                        <a class="nav-item nav-link active" href="/dessertsAndBakes"><b>DESSERTS & BAKES </b></a> --}}
                         <a class="nav-item nav-link active" href="/myaccount"><b>MY ACCOUNT </b></a>
                         <a class="nav-item nav-link active" href="/about"><b>ABOUT </b></a>
                        

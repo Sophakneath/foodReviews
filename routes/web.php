@@ -10,19 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', 'testing@getData');
 
 Route::get('/about', 'testing@showAbout');
 
-Route::get('/signin', 'testing@signin');
+// Route::get('/signin', 'testing@signin');
 
 // Route::post('/signin/checkLogin', 'testing@checkLogin');
 
-Route::get('/signup', 'testing@signup');
+// Route::get('/signup', 'testing@signup');
 
 Route::get('/myaccount', 'Myaccount@showMyaccount');
 
@@ -86,7 +86,70 @@ Route::get('/moreRatingDessert', 'moreData@showTopRatingDessert');
 
 Route::get('/searchDessert', 'searchDishes@showDessert');
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/myaccount/unfavourite', 'RejectPost@unfavourite');
+
+Route::get('/myaccount/favourite', 'RejectPost@favourite');
+
+Route::get('/myaccount/unfavouriteMoreData', 'RejectPost@unfavouriteMoreData');
+
+Route::get('/myaccount/favouriteMoreData', 'RejectPost@favouriteMoreData');
+
+Route::get('/adminReview', 'Admin@adminReview');
+
+Route::get('/adminAdvertisement', 'Admin@adminAdvertise');
+
+Route::get('/adminArticle', 'Admin@adminArticle');
+
+Route::get('/checkAndEdit', 'Admin@checkAndEdit');
+
+Route::get('/seePostDetail', 'Admin@postDetail');
+
+Route::get('/rejectPost', 'Admin@rejectPost');
+
+Route::get('seeAdvertiseDetail', 'Admin@seeAdvertiseDetail');
+
+Route::get('/editAdvertise', 'Admin@editAdvertise');
+
+Route::get('/searchActiveAdvertise', 'Admin@searchActiveAdvertise');
+
+Route::get('/searchInactiveAdvertise', 'Admin@searchInactiveAdvertise');
+
+Route::get('/searchPendingReview', 'Admin@searchPendingReview');
+
+Route::get('/searchAcceptReview', 'Admin@searchAcceptReview');
+
+Route::get('/searchRejectReview', 'Admin@searchRejectReview');
+
+Route::get('/myReviewDetail', 'Myaccount@myReviewDetail');
+
+Route::get('/myaccount/editpost', 'RejectPost@editpost');
+
+Route::get('/myaccount/resubmit', 'RejectPost@resubmit');
+
+Route::get('/reviewDetail', 'testing@reviewDetail');
+
+Route::get('/seeArticleDetail', 'Admin@seeArticleDetail');
+
+Route::get('/editArticle', 'Admin@editArticle');
+
+Route::get('/searchActiveArticle', 'Admin@searchActiveArticle');
+
+Route::get('/searchInactiveArticle', 'Admin@searchInactiveArticle');
+
+Route::get('/articleDetail', 'testing@articleDetail');
+
+Route::get('/updateClickCount', 'testing@updateClickCount');
+
+Route::get('/sendComment', 'UploadPost@sendComment');
+
+Route::get('/rating', 'UploadPost@sendRating');
+
+
+
+
+
+
 
 
