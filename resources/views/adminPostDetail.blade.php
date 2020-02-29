@@ -113,9 +113,9 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12 align-self-center" style="text-align:center;margin:0">
                         @if($d->image != null)
-                            <img src="{{ asset($d->image) }}" alt="" class="icon">
+                            <img src="{{ asset($d->image) }}" alt="" class="icon" style="object-fit:cover">
                         @else
-                            <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon">
+                            <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon" style="object-fit:cover">
                         @endif
                     </div>
                     <div class="col-lg-6 col-md-12 col-12 align-self-center" style="text-align:center;margin:0">
@@ -195,7 +195,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Ingredient</label>
-                                        <textarea class="form-control" id="exampleInputEmail1" name="ing" cols="30" rows="5" style="border-radius:5px" readonly>{{$d->ingredient}}</textarea>
+                                        <div style="border:1px solid gainsboro; padding:20px; border-radius:5px;">{!!$d->ingredient!!}</div>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Recipe</label>
-                                        <textarea class="form-control" id="exampleInputEmail1" name="rec" cols="30" rows="5" style="border-radius:5px" readonly>{{$d->recipe}}</textarea>
+                                        <div style="border:1px solid gainsboro; padding:20px; border-radius:5px;">{!!$d->recipe!!}</div>
                                     </div>
                                 </div>
                             </div>

@@ -55,11 +55,11 @@ class RejectPost extends Controller
             $cat = $request->input("food");
         }
         else if($main_cat == "Drink"){
-            $swe = $request->input("spi");
+            $swe = $request->input("swe");
             $cat = $request->input("drink");
         }
         else{
-            $main_cat = $request->input("spi");
+            $swe = $request->input("swe");
             $cat = $request->input("dessert");
         }
         $ease = $request->input("ease");
@@ -285,11 +285,11 @@ class RejectPost extends Controller
             $cat = $request->input("food");
         }
         else if($main_cat == "Drink"){
-            $swe = $request->input("spi");
+            $swe = $request->input("swe");
             $cat = $request->input("drink");
         }
         else{
-            $main_cat = $request->input("spi");
+            $swe = $request->input("swe");
             $cat = $request->input("dessert");
         }
         $ease = $request->input("ease");

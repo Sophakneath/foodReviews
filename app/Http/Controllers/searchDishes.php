@@ -17,7 +17,7 @@ class searchDishes extends Controller
                            ->where('dishes.name', 'like', '%'.$name.'%')
                            ->where('dishes.main_Cat','=',$mainCat)
                            ->where('posts.status','=','accepted')
-                           ->orderBy('posts.date', 'desc')
+                           ->orderBy('posts.checked_at', 'desc')
                            ->get();
         
         return view('search')->with('result', $result)->with('name', $name)->with('mainCat',$mainCat);
@@ -33,7 +33,7 @@ class searchDishes extends Controller
                            ->where('dishes.name', 'like', '%'.$name.'%')
                            ->where('dishes.category','=',$type)
                            ->where('posts.status','=','accepted')
-                           ->orderBy('posts.date', 'desc')
+                           ->orderBy('posts.checked_at', 'desc')
                            ->get();
         
         return view('searchFood')->with('result', $result)->with('name', $name)->with('type',$type);
@@ -50,7 +50,7 @@ class searchDishes extends Controller
                            ->where('dishes.name', 'like', '%'.$name.'%')
                            ->where('dishes.type','=',$type)
                            ->where('posts.status','=','accepted')
-                           ->orderBy('posts.date', 'desc')
+                           ->orderBy('posts.checked_at', 'desc')
                            ->get();
         
         return view('searchDrink')->with('result', $result)->with('name', $name)->with('type',$type);
@@ -67,7 +67,7 @@ class searchDishes extends Controller
                            ->where('dishes.name', 'like', '%'.$name.'%')
                            ->where('dishes.type','=',$type)
                            ->where('posts.status','=','accepted')
-                           ->orderBy('posts.date', 'desc')
+                           ->orderBy('posts.checked_at', 'desc')
                            ->get();
         
         return view('searchDessert')->with('result', $result)->with('name', $name)->with('type',$type);

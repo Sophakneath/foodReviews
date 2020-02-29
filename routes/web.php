@@ -10,19 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', 'testing@getData');
+Route::get('/homepage', 'testing@getData');
 
 Route::get('/about', 'testing@showAbout');
-
-// Route::get('/signin', 'testing@signin');
-
-// Route::post('/signin/checkLogin', 'testing@checkLogin');
-
-// Route::get('/signup', 'testing@signup');
 
 Route::get('/myaccount', 'Myaccount@showMyaccount');
 
@@ -86,7 +80,7 @@ Route::get('/moreRatingDessert', 'moreData@showTopRatingDessert');
 
 Route::get('/searchDessert', 'searchDishes@showDessert');
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/myaccount/unfavourite', 'RejectPost@unfavourite');
 

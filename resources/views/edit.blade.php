@@ -1,6 +1,6 @@
 @extends('detailMaster')
 
-@section('title', 'My Account')
+@section('title', 'Edit Review')
 
 @section('content')
 
@@ -573,7 +573,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Ingredient</label>
-                                        <textarea class="form-control" id="exampleInputEmail1" name="ing" cols="30" rows="5" style="border-radius:5px" required>{{$d->ingredient}}</textarea>
+                                        <textarea class="form-control" id="ing" name="ing" style="border-radius:5px" required>{{$d->ingredient}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -581,7 +581,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Recipe</label>
-                                        <textarea class="form-control" id="exampleInputEmail1" name="rec" cols="30" rows="5" style="border-radius:5px" required>{{$d->recipe}}</textarea>
+                                        <textarea class="form-control" id="rec" name="rec" style="border-radius:5px" required>{{$d->recipe}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -624,6 +624,17 @@
     </div>
 </div>
 <br><br>
+
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script>
+    var roxyFileman = 'fileman/index.html'; 
+    CKEDITOR.replace( 'rec',{filebrowserBrowseUrl:roxyFileman,
+                            filebrowserImageBrowseUrl:roxyFileman+'?type=image',
+                            removeDialogTabs: 'link:upload;image:upload'});
+    CKEDITOR.replace( 'ing',{filebrowserBrowseUrl:roxyFileman,
+                            filebrowserImageBrowseUrl:roxyFileman+'?type=image',
+                            removeDialogTabs: 'link:upload;image:upload'}); 
+</script>
 
 <script>
     function showInput()

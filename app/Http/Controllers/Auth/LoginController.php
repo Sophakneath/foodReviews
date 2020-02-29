@@ -39,7 +39,19 @@ class LoginController extends Controller
             return redirect('/adminAdvertisement');
         }
 
+        if(Auth::user()->role == "author")
+        {
+            return redirect('/adminArticle');
+        }
+
         return redirect('/myaccount');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+    return redirect('/homepage');
     }
 
     /**

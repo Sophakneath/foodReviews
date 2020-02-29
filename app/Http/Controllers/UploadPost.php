@@ -24,11 +24,11 @@ class UploadPost extends Controller
             $cat = $request->input("food");
         }
         else if($main_cat == "Drink"){
-            $swe = $request->input("spi");
+            $swe = $request->input("swe");
             $cat = $request->input("drink");
         }
         else{
-            $main_cat = $request->input("spi");
+            $swe = $request->input("swe");
             $cat = $request->input("dessert");
         }
         $ease = $request->input("ease");
@@ -189,7 +189,7 @@ class UploadPost extends Controller
         \DB::insert('insert into comments (reviewerID,date,comment,postID) values (?, ?,?,?)', [$uid,$date,$comment,$id]);
 
         $comment = \DB::table('comments')
-                           ->select('*')
+                           ->select('comments.*','users.username','users.image')
                            ->join('users','comments.reviewerID','=','users.id')
                            ->where('comments.postID','=',$id)
                            ->orderBy('date','desc')

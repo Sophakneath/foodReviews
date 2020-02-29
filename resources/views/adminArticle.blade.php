@@ -101,7 +101,7 @@
 
     <div class="container">
         @if(isset($_SESSION['addArticle']))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
             @php
                 echo $_SESSION['addArticle'];
             @endphp
@@ -112,7 +112,7 @@
         @php session_destroy(); @endphp
         @endif
         @if(isset($_SESSION['editArticle']))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
                 @php
                     echo $_SESSION['editArticle'];
                 @endphp
@@ -131,9 +131,9 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12 align-self-center" style="text-align:center;margin:0">
                         @if($d->image != null)
-                            <img src="{{ asset($d->image) }}" alt="" class="icon">
+                            <img src="{{ asset($d->image) }}" alt="" class="icon" style="object-fit:cover">
                         @else
-                            <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon">
+                            <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon" style="object-fit:cover">
                         @endif
                     </div>
                     <div class="col-lg-6 col-md-12 col-12 align-self-center" style="text-align:center;margin:0">

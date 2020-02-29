@@ -16,6 +16,43 @@
     .send:hover{
         background-color: ghostwhite;
     }
+
+    .mTitle, .modal-header{
+        font-family: Chalkduster;
+        text-align: center;
+        width: 100%;
+    }
+
+    .modal-body>p{
+        font-family: Chalkduster;
+        line-height: 40px;
+        font-size: 16px;
+    }
+
+    .icon{
+        width: 150px;
+        height: 150px;
+        border-radius:50%;
+    }
+
+    .cardview{
+        /* border: 1px solid #CD454B; */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        margin:0;
+        padding:30px; 
+    }
+
+    .sub{
+            background-color:#F0F0F0; width:100%; height:100%; border-radius:10px; text-align:center; padding-top:10px; padding-bottom:10px;
+        }
+
+    .sub:hover{
+        box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1); 
+        transition: 0.3s;
+    }
+
 </style>
 
 <div class="container">
@@ -35,7 +72,14 @@
                     <img class="card-img-top" src="{{ asset($d->cover) }}" alt="Card image cap" style="height:400px; object-fit: cover;">
                     <div class="card-body">
                         <h3 class="card-text" style="font-family: Chalkduster;">{{$d->name}}</h3>
-                        <h6 class="card-text" style="margin-top:20px;">Reviewed by {{$d->username}}</h6>
+                        <h6 class="card-text" style="margin-top:20px; font-size:18px;" data-target="#myModal" data-toggle="modal">Reviewed by &nbsp;
+                            @if($d->image != null)
+                                <img src="{{ asset($d->image) }}" style="width:40px; height:40px; border-radius:50%; object-fit:cover">
+                            @else
+                                <img src="{{ asset("img/icons/account.png") }}" style="width:40px; height:40px; border-radius:50%; object-fit:cover">
+                            @endif
+                            &nbsp; {{$d->username}}
+                        </h6>
                         <p class="card-text"><small class="text-muted" id="time">
                             @php 
                                 $timestamp = strtotime($d->date);	
@@ -80,8 +124,8 @@
                                     <div class="collapse" id="collapseExample" style="margin-top:20px;">
                                         <div class="card card-body">
                                             <div class="row">
-                                                <div class="col-lg-2">Rating</div>
-                                                <div class="col-lg-3">
+                                                <div class="col-lg-2 col-md-2 col-sm-3 col-3">Rating</div>
+                                                <div class="col-lg-3 col-md-3 col-sm-5 col-5">
                                                     @for($i=0; $i<$r->rate; $i++)
                                                         <i class="fa fa-star" id="star2" style="font-size: 18px; margin-right:5px; color:#FFE200;"></i>
                                                     @endfor
@@ -89,7 +133,7 @@
                                                         <i class="fa fa-star" id="star3" style="font-size: 18px; margin-right:5px;"></i>
                                                     @endfor
                                                 </div>
-                                                <div class="col-lg-5">
+                                                <div class="col-lg-5 col-md-5 col-sm-2 col-2">
                                                     <label id="count">{{$r->rate}} </label> &nbsp; <i class="fa fa-star" style="font-size: 18px; color:#FFE200;"></i>
                                                 </div>
                                             </div>  
@@ -103,8 +147,8 @@
                                 <div class="collapse" id="collapseExample" style="margin-top:20px;">
                                     <div class="card card-body">
                                         <div class="row">
-                                            <div class="col-lg-2">Rating</div>
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-2 col-md-2 col-sm-3 col-3">Rating</div>
+                                            <div class="col-lg-3 col-md-3 col-sm-5 col-5">
                                                 <i class="fa fa-star" id="star1" style="font-size: 18px; margin-right:5px;" onclick="star1()"></i>
                                                 <i class="fa fa-star" id="star2" style="font-size: 18px; margin-right:5px; color:#FFE200;" hidden onclick="star2()"></i>
                                                 <i class="fa fa-star" id="star3" style="font-size: 18px; margin-right:5px;" onclick="star3()"></i>
@@ -116,10 +160,10 @@
                                                 <i class="fa fa-star" id="star9" style="font-size: 18px;" onclick="star9()"></i>
                                                 <i class="fa fa-star" id="star10" style="font-size: 18px; color:#FFE200;" hidden onclick="star10()"></i>
                                             </div>
-                                            <div class="col-lg-5">
+                                            <div class="col-lg-5 col-md-5 col-sm-2 col-2">
                                                 <label id="count">0 </label> &nbsp; <i class="fa fa-star" style="font-size: 18px; color:#FFE200;"></i>
                                             </div>
-                                            <div class="col-lg-2">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-2">
                                                 <label onclick="sendRating()" id="submit">Submit</label>
                                             </div>
                                         </div>  
@@ -170,7 +214,7 @@
                                 <label>What you need for cooking this dish?</label>
                             </div>
                             <div class="col-lg-12" style="padding:16px;">
-                                <label>{{$d->ingredient}}</label>
+                                {!!$d->ingredient!!}
                             </div>
                         </div>
                     </div>
@@ -180,7 +224,7 @@
                                 <label>Step to make this dish?</label>
                             </div>
                             <div class="col-lg-12" style="padding:16px;">
-                                <label>{{$d->recipe}}</label>
+                                {!!$d->recipe!!}
                             </div>
                         </div>
                     </div>
@@ -281,10 +325,10 @@
                                 <img class="card-img-top" src="{{ asset($d->image) }}" alt="Card image cap" style="height:110px; object-fit:cover;">
                                 <div class="card-body">
                                 <label style="font-size:12px; width:100%;"> <strong style="font-size:15px;">{{$d->name}}</strong>
-                                    <br>
+                                    <br><br>
                                     Serve : {{$d->serve}}
                                 </label>
-                                <label style="font-size:12px; width:100%;" class="text-muted"> {{$d->short_des}} </label>
+                                {{-- <label class="block-ellipsis" class="text-muted"> {{$d->short_des}} </label> --}}
                                 </div>
                             </div>
                         </a>
@@ -292,7 +336,7 @@
                     @endforeach
                 </div>
            
-            <label style="margin-top:40px;"> <strong> You Might Also Like </strong></label>
+            <label style="margin-top:40px;"> <strong> EASY PEASY Preparation </strong></label>
             <div class="container" style="margin-top:10px;">
                 @foreach($suggest as $d)
                 <a href="/reviewDetail?postID={{$d->id}}&name={{$d->name}}" class="rev">
@@ -303,11 +347,15 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-6 justify-content-center d-flex align-items-center" style="height:100%;">
                             <label style="font-size:13px; width:100%;"> <strong style="font-size:15px;">{{$d->name}}</strong>
                             <br>
-                            Cateogry
+                            @if($d->main_cat == "Food")
+                                Cateogry : {{$d->category}}
+                            @else
+                                Cateogry : {{$d->type}}
+                            @endif
                             </label>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-2 justify-content-center d-flex align-items-center">
-                            <label style="font-size:13px; background-color:#FFE200; width:100%; padding:5px; text-align:center; border-radius:5px; color:white;">2.5</label>
+                            <label style="font-size:13px; background-color:#FFE200; width:100%; padding:5px; text-align:center; border-radius:5px; color:white;">{{$d->rating}}</label>
                         </div>
                     </div>
                 </a>
@@ -317,10 +365,131 @@
     </div> 
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-sm modal-md" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="mTitle" id="exampleModalLabel" style="color: rgb(230, 100, 100); margin-top: 10px;">PROFILE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            @foreach ($reviewer as $d)
+            <div class="row"  style="padding:20px;">
+                <div class="col-lg-12 col-md-12">
+                    <div class="cardview card">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-12 align-self-center" style="text-align:center">
+                                @if($d->image != null)
+                                    <img src="{{ asset($d->image) }}" alt="" class="icon" style="object-fit:cover">
+                                @else
+                                    <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon" style="object-fit:cover">
+                                @endif
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-12 align-self-center" style="text-align:center">
+                                <h3 class="t">{{$d->username}}</h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-3" style="margin-top:10px;">
+                                        <label><strong style="font-size:18px;"> 
+                                            @php
+                                                echo count($food) + count($drink) + count($dessert)
+                                            @endphp 
+                                        </strong></label>
+                                        <br>
+                                        <label>Total Posts</label>
+                                    </div>
+                                    <div class="col-lg-3" style="margin-top:10px;">
+                                        <label><strong style="font-size:18px;"> @php echo count($food) @endphp </strong></label>
+                                        <br>
+                                        <label>Food Posts</label>
+                                    </div>
+                                    <div class="col-lg-3" style="margin-top:10px;">
+                                        <label><strong style="font-size:18px;"> @php echo count($drink) @endphp </strong></label>
+                                        <br>
+                                        <label>Drink Posts</label>
+                                    </div>
+                                    <div class="col-lg-3" style="margin-top:10px;">
+                                        <label><strong style="font-size:18px;"> @php echo count($dessert) @endphp </strong></label>
+                                        <br>
+                                        <label>D&B Posts</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            <br>
+            <ul class="swipetabnav nav nav-pills mb-3 justify-content-center" id="pills-tab1" role="tablist" style="overflow-x: auto;">
+                <li class="nav-item" id="pending" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('pending','accepted','rejected')">
+                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:160px;" id="pills-pen-tab" data-toggle="pill" href="#pills-pen" role="tab" aria-controls="pills-pen" aria-selected="false">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/sandwich.png') }}" style="width:30px; display:inline-block;">
+                        <label class="categorysug">Food</label>
+                    </div>
+                </li>
+                <li class="nav-item" id="accepted" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('accepted','pending','rejected')">
+                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:160px;" id="pills-acc-tab" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-acc" aria-selected="false">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/soft-drink.png') }}" style="width:30px; display:inline-block;">
+                        <label class="categorysug">Drink</label>
+                    </div>
+                </li>
+                <li class="nav-item" id="rejected" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('rejected','pending','accepted')">
+                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:200px;" id="pills-rej-tab" data-toggle="pill" href="#pills-rej" role="tab" aria-controls="pills-rej" aria-selected="false">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/muffin.png') }}" style="width:30px; display:inline-block;">
+                        <label class="categorysug">Dessert & Bake</label>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-pen" role="tabpanel" aria-labelledby="pills-pen-tab">
+                    <div class="container">
+                        @include('widgets.userreview',['item'=>$food])
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-acc" role="tabpanel" aria-labelledby="pills-acc-tab">
+                    <div class="container">
+                        @include('widgets.userreview',['item'=>$drink])
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-rej" role="tabpanel" aria-labelledby="pills-rej-tab">
+                    <div class="container">
+                        @include('widgets.userreview',['item'=>$dessert])
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">CLOSE</button>
+        </div>
+        
+    </div>
+    </div>
+</div>  
+
+<br><br>
 <div id="snackbar">Favourite Post..</div>
 <div id="snackbar1">Unfavourite Post..</div>
 <script>
-    
+  
+    $(document).ready(function()
+    {
+        $('#pending').css({'box-shadow':'0 0 16px 1px rgba(0, 0, 0, 0.1)'});
+        $('#pending').css({'border-radius':'10px'});
+    });
+
+    function changeState(a,b,c){
+        var c1 = document.getElementById(a);
+        var c2 = document.getElementById(b);
+        var c3 = document.getElementById(c);
+        c1.style.boxShadow = "0 0 16px 1px rgba(0, 0, 0, 0.1)"; 
+        c1.style.borderRadius = "10px"; 
+        c2.style.boxShadow = "none"; 
+        c3.style.boxShadow = "none"; 
+    }
+
     var count = document.getElementById('count');
     $('.custom2').owlCarousel({
             items:1,

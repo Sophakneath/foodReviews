@@ -248,13 +248,13 @@
     <div class="row row1 fix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <nav class="navbar navbar-expand-lg navbar-dark bg">
-                <a href="/"><img class="bg logo navbar-brand" src="{{ asset('img/mylogo.png') }}" style="margin-right:100px;"></img></a>
+                <a href="/homepage"><img class="bg logo navbar-brand" src="{{ asset('img/mylogo.png') }}" style="margin-right:100px;"></img></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="/"> <b> <i class="fa fa-home"></i> HOME </b></a>
+                        <a class="nav-item nav-link active" href="/homepage"> <b> <i class="fa fa-home"></i> HOME </b></a>
                         <a class="nav-item nav-link active" href="/myaccount"><b>MY ACCOUNT </b></a>
                         <a class="nav-item nav-link active" href="/about"><b>ABOUT </b></a>
                        

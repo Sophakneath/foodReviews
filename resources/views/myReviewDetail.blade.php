@@ -1,6 +1,6 @@
 @extends('detailMaster')
 
-@section('title', 'My Account')
+@section('title', 'My Review Detail')
 
 @section('content')
 
@@ -150,7 +150,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Ingredient</label>
-                                    <textarea class="form-control" id="exampleInputEmail1" name="ing" cols="30" rows="5" style="border-radius:5px" readonly>{{$d->ingredient}}</textarea>
+                                    <div style="border:1px solid gainsboro; padding:20px; border-radius:5px;">{!!$d->ingredient!!}</div>
                                 </div>
                             </div>
                         </div>
@@ -158,7 +158,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Recipe</label>
-                                    <textarea class="form-control" id="exampleInputEmail1" name="rec" cols="30" rows="5" style="border-radius:5px" readonly>{{$d->recipe}}</textarea>
+                                    <div style="border:1px solid gainsboro; padding:20px; border-radius:5px;">{!!$d->ingredient!!}</div>
                                 </div>
                             </div>
                         </div>

@@ -23,7 +23,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('posts.status','=','accepted')
                             ->leftJoin('saveFoods','posts.id','=','saveFoods.id','AND','saveFoods.reviewerID','=',$uid)
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -67,7 +67,7 @@ class moreData extends Controller
                            ->where('posts.rating', '=', '5')
                            ->where('posts.status','=','accepted')
                            ->leftJoin('saveFoods','posts.id','=','saveFoods.id','AND','saveFoods.reviewerID','=',$uid)
-                           ->orderBy('posts.date', 'desc')
+                           ->orderBy('posts.checked_at', 'desc')
                            ->paginate(16);
 
         $title = "TOP RATING DISHES";
@@ -83,7 +83,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Food')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -99,7 +99,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Vegetarian')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -115,7 +115,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Meat Lover')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -131,7 +131,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Healthy')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -147,7 +147,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Spicy Lover')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -178,7 +178,7 @@ class moreData extends Controller
                             ->where('dishes.main_cat','=','Food')
                             ->where('posts.rating','=','5')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(16);
 
         $title = "TOP RATING FOOD";
@@ -194,7 +194,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Drink')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -210,7 +210,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Smoothie')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -226,7 +226,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Juice')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -242,7 +242,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Energy')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -258,7 +258,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Alcoholic')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -275,7 +275,6 @@ class moreData extends Controller
                             ->where('dishes.main_cat','=','Drink')
                             ->where('posts.status','=','accepted')
                             ->orderBy('click_count', 'desc')
-                            ->orderBy('posts.date', 'desc')
                             ->paginate(9);
 
         $title = "TOP VIEW Drink";
@@ -290,7 +289,7 @@ class moreData extends Controller
                             ->where('dishes.main_cat','=','Drink')
                             ->where('posts.rating','=','5')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(16);
 
         $title = "TOP RATING Drink";
@@ -306,7 +305,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Dessert')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -322,7 +321,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Cookie')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -338,7 +337,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Cake')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -354,7 +353,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Chocolate')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -370,7 +369,7 @@ class moreData extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Ice Cream')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(9);
 
         $title = "FIND OUT MORE ABOUT THESE DISHES";
@@ -402,7 +401,7 @@ class moreData extends Controller
                             ->where('dishes.main_cat','=','Dessert')
                             ->where('posts.rating','=','5')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->paginate(16);
 
         $title = "TOP RATING Dessert";

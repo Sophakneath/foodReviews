@@ -4,7 +4,7 @@
         @php $count++; @endphp
         @if($count > 6) @break; @endif
         @php $rating = $d->rating @endphp
-        <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom:20px;">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="margin-bottom:20px;">
             <div class="card c" style="background-color:white;">
                 <a href="/reviewDetail?postID={{$d->id}}&name={{$d->name}}" class="rev">
                     <div class="top-sec">
@@ -17,7 +17,7 @@
                     <a href="/reviewDetail?postID={{$d->id}}&name={{$d->name}}" class="rev">
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
+                                <h2 class="smalltitle title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><b> {{$d->name}}</b></h2>      
                             </div>
                         </div>
                         <div class="row">

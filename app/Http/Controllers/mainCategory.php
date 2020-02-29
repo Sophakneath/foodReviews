@@ -14,7 +14,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Vegetarian')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->get();
 
         $meat = \DB::table('posts')
@@ -23,7 +23,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Meat Lover')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $hea = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -31,7 +31,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Healthy')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $spi = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -39,7 +39,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.category','=','Spicy Lover')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $all = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -47,7 +47,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Food')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $tview = \DB::table('posts')
                             ->select('posts.*','dishes.*', 'users.username','posts.num_of_pp_rating')
@@ -65,7 +65,7 @@ class mainCategory extends Controller
                             ->where('dishes.main_cat','=','Food')
                             ->where('posts.rating', '=', '5')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->get();
 
         $restaurant = \DB::table('restaurants')->select('*')->where('status','=','active')->inRandomOrder()->orderBy('date', 'desc')->get();
@@ -89,7 +89,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.type','=','Smoothie')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $juice = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -97,7 +97,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.type','=','Juice')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $energy = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -105,7 +105,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.type','=','Energy')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $alc = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -113,7 +113,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.type','=','Alcoholic')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $all = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -121,7 +121,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Drink')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $tview = \DB::table('posts')
                             ->select('posts.*','dishes.*', 'users.username','posts.num_of_pp_rating')
@@ -139,7 +139,7 @@ class mainCategory extends Controller
                             ->where('dishes.main_cat','=','Drink')
                             ->where('posts.rating', '=', '5')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->get();
 
         $restaurant = \DB::table('restaurants')->select('*')->where('status','=','active')->inRandomOrder()->orderBy('date', 'desc')->get();
@@ -162,7 +162,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.type','=','Cookie')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $cake = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -170,7 +170,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.type','=','Cake')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $cho = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -178,7 +178,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.type','=','Chocolate')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $ice = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -186,7 +186,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.type','=','Ice Cream')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $all = \DB::table('posts')
                             ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
@@ -194,7 +194,7 @@ class mainCategory extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('dishes.main_cat','=','Dessert')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')->get();
+                            ->orderBy('posts.checked_at', 'desc')->get();
 
         $tview = \DB::table('posts')
                             ->select('posts.*','dishes.*', 'users.username','posts.num_of_pp_rating')
@@ -212,7 +212,7 @@ class mainCategory extends Controller
                             ->where('dishes.main_cat','=','Dessert')
                             ->where('posts.rating', '=', '5')
                             ->where('posts.status','=','accepted')
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->get();
 
         $restaurant = \DB::table('restaurants')->select('*')->where('status','=','active')->inRandomOrder()->orderBy('date', 'desc')->get();

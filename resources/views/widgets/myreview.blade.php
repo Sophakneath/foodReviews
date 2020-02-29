@@ -2,7 +2,7 @@
     @if(count($item) > 0)
         @foreach($item as $d)
             @php $rating = $d->rating; @endphp
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="padding-bottom:20px;">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="margin-bottom:20px; width:100%;">
                 <a href="/myReviewDetail?postID={{$d->id}}" class="rev">
                     <div class="card c" style="background-color:white;">
                         <div class="top-sec">
@@ -13,7 +13,7 @@
                             <div class="bottom-sec">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
+                                        <h2 class="smalltitle title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><b> {{$d->name}}</b></h2>      
                                     </div>
                                 </div>
                             

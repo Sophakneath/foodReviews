@@ -112,9 +112,9 @@
 <div class="container">
 
     @if(isset($_SESSION['success']))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
             @php
-                echo $_SESSION['success'];
+                // echo $_SESSION['success'];
             @endphp
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -124,7 +124,7 @@
     @endif
 
     @if(isset($_SESSION['profile']))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
             @php
                 echo $_SESSION['profile'];
             @endphp
@@ -136,7 +136,7 @@
     @endif
 
     @if(isset($_SESSION['reupload']))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
             @php
                 echo $_SESSION['reupload'];
             @endphp
@@ -156,9 +156,9 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12 align-self-center" style="text-align:center">
                         @if($d->image != null)
-                            <img src="{{ asset($d->image) }}" alt="" class="icon">
+                            <img src="{{ asset($d->image) }}" alt="" class="icon" style="object-fit:cover">
                         @else
-                            <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon">
+                            <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon" style="object-fit:cover">
                         @endif
                     </div>
                     <div class="col-lg-6 col-md-12 col-12 align-self-center" style="text-align:center">
@@ -221,28 +221,27 @@
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
                     <div class="container">
-                        <div class="row">
                             <ul class="swipetabnav nav nav-pills mb-3 justify-content-center" id="pills-tab1" role="tablist" style="overflow-x: auto;">
                                 <li class="nav-item" id="all" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('all','pending','accepted','rejected')">
-                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;  width:255px;" id="pills-any-tab" data-toggle="pill" href="#pills-any" role="tab" aria-controls="pills-any" aria-selected="true">
+                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;  width:220px;" id="pills-any-tab" data-toggle="pill" href="#pills-any" role="tab" aria-controls="pills-any" aria-selected="true">
                                         <span class="logohelper"></span><img src="{{ asset('img/icons/paper.png') }}" style="width:40px; display:inline-block;">
                                         <label class="categorysug">All</label>
                                     </div>
                                 </li>
                                 <li class="nav-item" id="pending" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('pending','all','accepted','rejected')">
-                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-pen-tab" data-toggle="pill" href="#pills-pen" role="tab" aria-controls="pills-pen" aria-selected="false">
+                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:220px;" id="pills-pen-tab" data-toggle="pill" href="#pills-pen" role="tab" aria-controls="pills-pen" aria-selected="false">
                                         <span class="logohelper"></span><img src="{{ asset('img/icons/refresh.png') }}" style="width:40px; display:inline-block;">
                                         <label class="categorysug">Pending</label>
                                     </div>
                                 </li>
                                 <li class="nav-item" id="accepted" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('accepted','all','pending','rejected')">
-                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-acc-tab" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-acc" aria-selected="false">
+                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:220px;" id="pills-acc-tab" data-toggle="pill" href="#pills-acc" role="tab" aria-controls="pills-acc" aria-selected="false">
                                         <span class="logohelper"></span><img src="{{ asset('img/icons/correct.png') }}" style="width:40px; display:inline-block;">
                                         <label class="categorysug">Accepted</label>
                                     </div>
                                 </li>
                                 <li class="nav-item" id="rejected" style="margin-right:10px; margin-left:10px; margin-top:10px; margin-bottom:10px;" onclick="changeState('rejected','all','pending','accepted')">
-                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:255px;" id="pills-rej-tab" data-toggle="pill" href="#pills-rej" role="tab" aria-controls="pills-rej" aria-selected="false">
+                                    <div class="item slidecat sub" style="padding-left:10px; padding-right:10px;   width:220px;" id="pills-rej-tab" data-toggle="pill" href="#pills-rej" role="tab" aria-controls="pills-rej" aria-selected="false">
                                         <span class="logohelper"></span><img src="{{ asset('img/icons/quit.png') }}" style="width:40px; display:inline-block;">
                                         <label class="categorysug">Rejected</label>
                                     </div>
@@ -275,7 +274,7 @@
                                                                 <div class="bottom-sec">
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
-                                                                            <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
+                                                                            <h2 class="smalltitle title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><b> {{$d->name}}</b></h2>      
                                                                         </div>
                                                                     </div>
                                                                 
@@ -340,7 +339,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
 
@@ -443,7 +441,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Ingredient</label>
-                                                        <textarea class="form-control" id="exampleInputEmail1" name="ing" cols="30" rows="5" style="border-radius:5px" required></textarea>
+                                                        <textarea type="text" class="form-control" id="ing" name="ing" style="border-radius:5px" required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -451,7 +449,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Recipe</label>
-                                                        <textarea class="form-control" id="exampleInputEmail1" name="rec" cols="30" rows="5" style="border-radius:5px" required></textarea>
+                                                        <textarea type="text" class="form-control" id="rec" name="rec" style="border-radius:5px" required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -598,15 +596,15 @@
                                     <div class="row">
                                         <div class="col-lg-6 align-self-center" style="text-align:center">
                                             @if($d->image != null)
-                                                <img src="{{ asset($d->image) }}" alt="" class="icon1" id="pro">
+                                                <img src="{{ asset($d->image) }}" alt="" class="icon1" id="pro" style="object-fit:cover">
                                             @else
-                                                <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon1" id="pro">
+                                                <img src="{{ asset("img/icons/account.png") }}" alt="" class="icon1" id="pro" style="object-fit:cover">
                                             @endif
                                             
                                             <br>
                                             <div class="upload-btn-wrapper" style="margin-top:20px;">
                                                 <button class="upload">Upload a file</button>
-                                                <input class="form-control" type="file" id="myfile" name="myfile" required accept="image/*" onchange="preview(event,'pro',0)">
+                                                <input class="form-control" type="file" id="myfile" name="myfile" accept="image/*" onchange="preview(event,'pro',0)">
                                             </div>
                                         </div>
                                         <div class="col-lg-6" style="padding:80px">
@@ -725,6 +723,19 @@
 </div>  
 
 <br><br>
+
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script>
+    var roxyFileman = 'fileman/index.html'; 
+    CKEDITOR.replace( 'rec',{filebrowserBrowseUrl:roxyFileman,
+                            filebrowserImageBrowseUrl:roxyFileman+'?type=image',
+                            removeDialogTabs: 'link:upload;image:upload'}); 
+
+    CKEDITOR.replace( 'ing',{filebrowserBrowseUrl:roxyFileman,
+                            filebrowserImageBrowseUrl:roxyFileman+'?type=image',
+                            removeDialogTabs: 'link:upload;image:upload'}); 
+</script>
+
 <script>
     $(document).ready(function()
     {

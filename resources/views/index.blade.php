@@ -156,9 +156,9 @@
         <img src="{{ asset($d->image) }}" style="height:500px; object-fit:cover;">
         <div style="position:absolute; bottom:0; height:500px; width:100%; background-color:rgba(0, 0, 0, 0.2)">
             <input id="resID{{$d->restaurantID}}" hidden value="{{$d->restaurantID}}"/>
-            <h5 class="type title" style="color:white; font-size:38px; text-align:left; margin-top:270px; margin-left:60px;"> <b>{{$d->name}}</b></h5> 
-            <h5 style="color:white; font-size:20px; text-align:left; margin-top:20px; margin-left:60px;"> <b>Serve : {{$d->serve}}</b></h5> 
-            <h5 style="color:white; font-size:16px; text-align:left; margin-top:10px; margin-left:60px;"> <b>{{$d->short_des}}</b></h5> 
+            <h5 style="color:white; font-size:38px; font-family:Chalkduster; text-align:left; margin-top:230px; margin-left:60px; margin-right:60px;"> <b>{{$d->name}}</b></h5> 
+            <h5 style="color:white; font-size:20px; text-align:left; margin-top:20px; margin-left:60px; margin-right:60px;"> <b>Serve : {{$d->serve}}</b></h5> 
+            <h5 class="d-none d-md-block" style="color:white; font-size:16px; text-align:left; margin-top:10px; margin-left:60px; margin-right:60px; overflow: hidden;"> <b>{{$d->short_des}}</b></h5>
             <a href="{{$d->link}}" target="_blank">
                 <button class="btn btn-danger" style="margin-left:60px; margin-top:10px; magin-bottom:30px;" onclick="clickCount('resID{{$d->restaurantID}}')">Interested</button>
             </a>
@@ -215,7 +215,27 @@
 @endif
 
 {{--  --}}
-    
+ 
+<div class="container">
+    <br><br><br>
+    <div class="row" style="margin:0">
+        <div class="col-lg-12">
+            <h5 class="type title"> <b>ASEAN NATION DISHES</b></h5>      
+        </div>    
+    </div>    
+    <br><br>
+    <div class="row">
+        <div class="col-lg-4" style="margin-bottom:10px;">
+            <iframe width="100%" height="250px" src="https://www.youtube.com/embed/Mf5ne9M2bj8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="col-lg-4" style="margin-bottom:10px;">
+            <iframe width="100%" height="250px" src="https://www.youtube.com/embed/9d_GSjBjCRI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="col-lg-4" style="margin-bottom:10px;">
+            <iframe width="100%" height="250px" src="https://www.youtube.com/embed/BL1EP6MCquA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <br><br><br>
@@ -227,9 +247,9 @@
     <br><br>
     <div class="row">
         @foreach($article as $d)
-            <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="margin-bottom:20px;">
                 <a href="/articleDetail?id={{$d->id}}">
-                    <div class="card hea" style="width: 100%;">
+                    <div class="card hea" style="width: 100%; height:100%">
                         <img src="{{ asset($d->icon) }}" class="card-img-top mx-auto" style="width:100px; height:100px; object-fit:cover; margin-top:25px;">
                         <div class="card-body">
                             <h5 class="type title"> <b>{{$d->name}}</b></h5>   
@@ -240,8 +260,8 @@
         @endforeach
     </div>
 </div>
-<br><br>
 
+<br><br>
 <script>
     var data ;
     var type = "";

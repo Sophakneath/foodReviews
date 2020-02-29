@@ -79,10 +79,10 @@
                             <img class="card-img-top" src="{{ asset($d->image) }}" alt="Card image cap" style="height:110px; object-fit:cover;">
                             <div class="card-body">
                             <label style="font-size:12px; width:100%;"> <strong style="font-size:15px;">{{$d->name}}</strong>
-                                <br>
+                                <br><br>
                                 Serve : {{$d->serve}}
                             </label>
-                            <label style="font-size:12px; width:100%;" class="text-muted"> {{$d->short_des}} </label>
+                            {{-- <label style="font-size:12px; width:100%;" class="text-muted"> {{$d->short_des}} </label> --}}
                             </div>
                         </div>
                         </a>
@@ -90,22 +90,26 @@
                     @endforeach
                 </div>
            
-            <label style="margin-top:40px;"> <strong> Dish Recommandation </strong></label>
+            <label style="margin-top:40px;"> <strong> Recommended Dishes </strong></label>
             <div class="container" style="margin-top:10px;">
                 @foreach($suggest as $d)
                 <a href="/reviewDetail?postID={{$d->id}}&name={{$d->name}}" class="rev">
-                    <div class="row" style="box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1); padding-top:10px; padding-bottom:10px; border-radius:5px; margin-top:10px;">
-                        <div class="col-lg-4">
+                    <div class="row" style="padding-top:10px; padding-bottom:10px; border-radius:5px; margin-top:10px; box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1); margin-bottom:20px;">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="{{ asset($d->cover) }}" alt="" style="width:100%; height:50px; object-fit:cover;">
                         </div>
-                        <div class="col-lg-6 justify-content-center d-flex align-items-center" style="height:100%;">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-6 justify-content-center d-flex align-items-center" style="height:100%;">
                             <label style="font-size:13px; width:100%;"> <strong style="font-size:15px;">{{$d->name}}</strong>
                             <br>
-                            Cateogry
+                            @if($d->main_cat == "Food")
+                                Cateogry : {{$d->category}}
+                            @else
+                                Cateogry : {{$d->type}}
+                            @endif
                             </label>
                         </div>
-                        <div class="col-lg-2 justify-content-center d-flex align-items-center">
-                            <label style="font-size:13px; background-color:#FFE200; width:100%; padding:5px; text-align:center; border-radius:5px; color:white;">2.5</label>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-2 justify-content-center d-flex align-items-center">
+                            <label style="font-size:13px; background-color:#FFE200; width:100%; padding:5px; text-align:center; border-radius:5px; color:white;">{{$d->rating}}</label>
                         </div>
                     </div>
                 </a>

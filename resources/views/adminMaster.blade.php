@@ -229,7 +229,7 @@
     <div class="row row1 fix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="margin:0; padding:0;">
             <nav class="navbar navbar-expand-lg navbar-dark bg">
-                <a href="/"><img class="bg logo navbar-brand" src="{{ asset('img/mylogo.png') }}" style="margin-right:100px;"></img></a>
+                <a href="/homepage"><img class="bg logo navbar-brand" src="{{ asset('img/mylogo.png') }}" style="margin-right:100px;"></img></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

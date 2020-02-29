@@ -1,6 +1,6 @@
 @extends('detailMaster')
 
-@section('title', 'MoreData')
+@section('title', 'More Data')
 
 @section('content')
 
@@ -27,7 +27,7 @@
                             <div class="bottom-sec">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
+                                            <h2 class="smalltitle title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><b> {{$d->name}}</b></h2>      
                                         </div>
                                     </div>
                                     <div class="row">

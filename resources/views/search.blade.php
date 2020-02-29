@@ -1,6 +1,6 @@
 @extends('detailMaster')
 
-@section('title', 'SearchDishes')
+@section('title', 'Search Dishes')
 
 @section('content')
 
@@ -63,7 +63,7 @@
         <div class="row" id="itemsContainer">   
             @foreach($result as $d)
             @php $rating = $d->rating; @endphp
-                <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding-bottom:20px;">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="margin-bottom:20px;">
                     <a href="/reviewDetail?postID={{$d->id}}&name={{$d->name}}" class="rev">
                         <div class="card c" style="background-color:white;">
                             <div class="top-sec">
@@ -74,7 +74,7 @@
                                 <div class="bottom-sec">
                                         <div class="row">
                                             <div class="col-12">
-                                                <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>      
+                                                <h2 class="smalltitle title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><b> {{$d->name}}</b></h2>      
                                             </div>
                                         </div>
                                         <div class="row">
@@ -88,12 +88,6 @@
                                             </div>
                                         </div> 
                                         <br>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <img src="{{ asset('img/icons/spoon.png') }}" style="width:25px; height:25px;">
-                                                <label class="categorysug">&nbsp;Dish Type : {{$d->type}}</label>
-                                            </div>
-                                        </div> 
                                         <div class="row" style="margin-top: 5px;">
                                             <div class="col-12">
                                             <img src="{{ asset('img/icons/location.png') }}" style="width:25px; height:25px;">

@@ -1,6 +1,6 @@
 @extends('master1')
 
-@section('title', 'Homepage')
+@section('title', 'Food')
 
 @section('Maintitle', 'FOOD & FOOD')
 
@@ -64,33 +64,33 @@
     </div>
     <br><br>
     <div class="container">
-        <ul class="swipetabnav nav  nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" style="overflow-x: auto;">
-                <li class="nav-item" id="all" style="margin-right:10px; margin-left:10px;" onclick="changeState('all','veg','mea','hea','spi')">
-                    <div class="item slidecat" style="padding-left:20px; padding-right:20px; width:200px;" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-hea" aria-selected="true">
+        <ul class="swipetabnav nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item" style="margin:10px;" onclick="changeState('all','veg','mea','hea','spi')">
+                    <div class="item slidecat" id="all" style="padding-left:20px; padding-right:20px; width:200px;" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-hea" aria-selected="true">
                         <span class="logohelper"></span><img src="{{ asset('img/icons/healthy-food.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">All Food</label>
                     </div>
                 </li>
-                <li class="nav-item" id="veg" style="margin-right:10px; margin-left:10px;" onclick="changeState('veg','all','mea','hea','spi')">
-                    <div class="item slidecat" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-veg-tab" data-toggle="pill" href="#pills-veg" role="tab" aria-controls="pills-veg" aria-selected="false">
+                <li class="nav-item" style="margin:10px;" onclick="changeState('veg','all','mea','hea','spi')">
+                    <div class="item slidecat" id="veg" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-veg-tab" data-toggle="pill" href="#pills-veg" role="tab" aria-controls="pills-veg" aria-selected="false">
                         <span class="logohelper"></span><img src="{{ asset('img/icons/fruit.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Vegetarian</label>
                     </div>
                 </li>
-                <li class="nav-item" id="mea" style="margin-right:10px; margin-left:10px;" onclick="changeState('mea','all','veg','hea','spi')">
-                    <div class="item slidecat" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-meat-tab" data-toggle="pill" href="#pills-meat" role="tab" aria-controls="pills-meat" aria-selected="false">
+                <li class="nav-item" style="margin:10px;" onclick="changeState('mea','all','veg','hea','spi')">
+                    <div class="item slidecat"  id="mea" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-meat-tab" data-toggle="pill" href="#pills-meat" role="tab" aria-controls="pills-meat" aria-selected="false">
                         <span class="logohelper"></span><img src="{{ asset('img/icons/steak.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Meat Lover</label>
                     </div>
                 </li>
-                <li class="nav-item" id="hea" style="margin-right:10px; margin-left:10px;" onclick="changeState('hea','all','veg','mea','spi')">
-                    <div class="item slidecat" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-hea-tab" data-toggle="pill" href="#pills-hea" role="tab" aria-controls="pills-on" aria-selected="false">
+                <li class="nav-item" style="margin:10px;" onclick="changeState('hea','all','veg','mea','spi')">
+                    <div class="item slidecat" id="hea"  style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-hea-tab" data-toggle="pill" href="#pills-hea" role="tab" aria-controls="pills-on" aria-selected="false">
                         <span class="logohelper"></span><img src="{{ asset('img/icons/salad.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Healthy</label>
                     </div>
                 </li>
-                <li class="nav-item" id="spi" style="margin-right:10px; margin-left:10px;" onclick="changeState('spi','all','veg','mea','hea')">
-                    <div class="item slidecat" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-spi-tab" data-toggle="pill" href="#pills-spi" role="tab" aria-controls="pills-spi" aria-selected="false">
+                <li class="nav-item" style="margin:10px;" onclick="changeState('spi','all','veg','mea','hea')">
+                    <div class="item slidecat" id="spi" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-spi-tab" data-toggle="pill" href="#pills-spi" role="tab" aria-controls="pills-spi" aria-selected="false">
                         <span class="logohelper"></span><img src="{{ asset('img/icons/salad.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Spicy Lover</label>
                     </div>
@@ -180,9 +180,9 @@
             <img src="{{ asset($d->image) }}" style="height:500px; object-fit:cover;">
             <div style="position:absolute; bottom:0; height:500px; width:100%; background-color:rgba(0, 0, 0, 0.2)">
                 <input id="resID{{$d->restaurantID}}" hidden value="{{$d->restaurantID}}"/>
-                <h5 class="type title" style="color:white; font-size:38px; text-align:left; margin-top:270px; margin-left:60px;"> <b>{{$d->name}}</b></h5> 
-                <h5 style="color:white; font-size:20px; text-align:left; margin-top:20px; margin-left:60px;"> <b>Serve : {{$d->serve}}</b></h5> 
-                <h5 style="color:white; font-size:16px; text-align:left; margin-top:10px; margin-left:60px;"> <b>{{$d->short_des}}</b></h5> 
+                <h5 style="color:white; font-size:38px; font-family:Chalkduster; text-align:left; margin-top:230px; margin-left:60px; margin-right:60px;"> <b>{{$d->name}}</b></h5> 
+                <h5 style="color:white; font-size:20px; text-align:left; margin-top:20px; margin-left:60px; margin-right:60px;"> <b>Serve : {{$d->serve}}</b></h5> 
+                <h5 class="d-none d-md-block" style="color:white; font-size:16px; text-align:left; margin-top:10px; margin-left:60px; margin-right:60px; overflow: hidden;"> <b>{{$d->short_des}}</b></h5>
                 <a href="{{$d->link}}" target="_blank">
                     <button class="btn btn-danger" style="margin-left:60px; margin-top:10px; magin-bottom:30px;" onclick="clickCount('resID{{$d->restaurantID}}')">Interested</button>
                 </a>

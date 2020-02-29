@@ -29,7 +29,7 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','pending')
-                ->orderBy('posts.date', 'desc')
+                ->orderBy('posts.date', 'asc')
                 ->get();
 
             $accept = \DB::table('posts')
@@ -37,7 +37,7 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','accepted')
-                ->orderBy('posts.checked_at', 'desc')
+                ->orderBy('posts.checked_at', 'asc')
                 ->get();
 
             $reject = \DB::table('posts')
@@ -45,7 +45,7 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','rejected')
-                ->orderBy('posts.checked_at', 'desc')
+                ->orderBy('posts.checked_at', 'asc')
                 ->get();  
 
             return view('adminReview')->with('data', $data)->with('pending',$pending)->with('accept', $accept)->with('reject',$reject);
@@ -70,13 +70,13 @@ class Admin extends Controller
             $active = \DB::table('restaurants')
                 ->select('restaurants.*')
                 ->where('status',"=",'Active')
-                ->orderby('date','desc')
+                ->orderby('date','asc')
                 ->get();
 
             $inactive = \DB::table('restaurants')
                 ->select('restaurants.*')
                 ->where('status',"=",'Inactive')
-                ->orderby('date','desc')
+                ->orderby('date','asc')
                 ->get();
 
             return view('adminAdvertise')->with('data',$data)->with('active',$active)->with('inactive',$inactive);
@@ -99,13 +99,13 @@ class Admin extends Controller
             $active = \DB::table('article')
                 ->select('*')
                 ->where('status',"=",'Active')
-                ->orderby('created_at','desc')
+                ->orderby('created_at','asc')
                 ->get();
 
             $inactive = \DB::table('article')
                 ->select('*')
                 ->where('status',"=",'Inactive')
-                ->orderby('created_at','desc')
+                ->orderby('created_at','asc')
                 ->get();
 
             return view('adminArticle')->with('data',$data)->with('active',$active)->with('inactive',$inactive);
@@ -205,9 +205,9 @@ class Admin extends Controller
 
         $item = \DB::table('restaurants')
                 ->select('restaurants.*')
-                ->where('name', 'like', '%'.$name.'%')
+                ->where('name', 'like', $name.'%')
                 ->where('status','=','Active')
-                ->orderby('date','desc')
+                ->orderby('date','asc')
                 ->get();
 
         $itemView = view('widgets.advertiseItem')
@@ -225,9 +225,9 @@ class Admin extends Controller
 
         $item = \DB::table('restaurants')
                 ->select('restaurants.*')
-                ->where('name', 'like', '%'.$name.'%')
+                ->where('name', 'like', $name.'%')
                 ->where('status','=','Inactive')
-                ->orderby('date','desc')
+                ->orderby('date','asc')
                 ->get();
 
         $itemView = view('widgets.advertiseItem')
@@ -248,8 +248,8 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','pending')
-                ->where('name', 'like', '%'.$name.'%')
-                ->orderBy('posts.date', 'desc')
+                ->where('name', 'like', $name.'%')
+                ->orderBy('posts.date', 'asc')
                 ->get();
 
         $itemView = view('widgets.reviewItem')
@@ -270,8 +270,8 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','accepted')
-                ->where('name', 'like', '%'.$name.'%')
-                ->orderBy('posts.date', 'desc')
+                ->where('name', 'like', $name.'%')
+                ->orderBy('posts.date', 'asc')
                 ->get();
 
         $itemView = view('widgets.reviewItem')
@@ -292,8 +292,8 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','rejected')
-                ->where('name', 'like', '%'.$name.'%')
-                ->orderBy('posts.date', 'desc')
+                ->where('name', 'like', $name.'%')
+                ->orderBy('posts.date', 'asc')
                 ->get();
 
         $itemView = view('widgets.reviewItem')
@@ -338,9 +338,9 @@ class Admin extends Controller
 
         $item = \DB::table('article')
                 ->select('*')
-                ->where('name', 'like', '%'.$name.'%')
+                ->where('name', 'like', $name.'%')
                 ->where('status','=','Active')
-                ->orderby('created_at','desc')
+                ->orderby('created_at','asc')
                 ->get();
 
         $itemView = view('widgets.articleitem')
@@ -358,9 +358,9 @@ class Admin extends Controller
 
         $item = \DB::table('article')
                 ->select('*')
-                ->where('name', 'like', '%'.$name.'%')
+                ->where('name', 'like', $name.'%')
                 ->where('status','=','Inactive')
-                ->orderby('created_at','desc')
+                ->orderby('created_at','asc')
                 ->get();
 
         $itemView = view('widgets.articleitem')

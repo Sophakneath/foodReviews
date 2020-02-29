@@ -3,7 +3,11 @@
         <div class="col-lg-12" style="border:2px solid gainsboro; border-radius:20px; margin-bottom:20px; padding:20px;">
             <div class="row">
                 <div class="col-lg-1">
-                    <img src="{{ asset('img/cover1.png') }}" style="width:50px; height:50px; border-radius:50%; object-fit:cover">
+                    @if($c->image != null)
+                        <img src="{{ asset($c->image) }}" style="width:50px; height:50px; border-radius:50%; object-fit:cover">
+                    @else
+                        <img src="{{ asset("img/icons/account.png") }}" style="width:50px; height:50px; border-radius:50%; object-fit:cover">
+                    @endif
                 </div>
                 <div class="col-lg-11">
                     <label style="padding-left:20px; font-size:13px; width:100%;">

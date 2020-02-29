@@ -27,6 +27,11 @@ class RedirectIfAuthenticated
             {
                 return redirect('/adminAdvertisement');
             }
+
+            if(Auth::user()->role == "author")
+            {
+                return redirect('/adminArticle');
+            }
     
             return redirect('/myaccount');
         }

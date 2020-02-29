@@ -1,12 +1,15 @@
 <div class="container">
 @if(count($item) > 0)
+    @php
+        $count =0;
+    @endphp
     @foreach($item as $d)
-        <div class="row">
+        {{-- <div class="row"> --}}
             <a href="/seeAdvertiseDetail?id={{$d->restaurantID}}" class="rev">
-                <div class="row" style="border-radius:5px; margin-top:20px; border: none; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="rev">
+                <div class="row rev" style="border-radius:5px; margin-top:20px; border: none; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);" class="rev">
                     <div class="col-lg-1 col-sm-2 col-2 col-md-1 justify-content-center d-flex align-items-center" style="border-top-left-radius:5px; border-bottom-left-radius:5px; background-color:#CD454B; ">
                         <div class="justify-content-center d-flex align-items-center" style="width:70px; height:70px;">
-                            <label style="color:white; font-size:20px;">{{$d->restaurantID}}</label>
+                            <label style="color:white; font-size:20px;">{{++$count}}</label>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-12 col-12 col-md-3" style="padding:10px;">
@@ -35,7 +38,7 @@
                     </div>
                 </div>
             </a>
-        </div>
+        {{-- </div> --}}
     @endforeach
 @else
     <div class="row">

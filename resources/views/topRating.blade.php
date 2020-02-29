@@ -22,12 +22,12 @@
                     <div class="card abc mb-3" style="max-width: 100%;">
                         <div class="row no-gutters">
                             <div class="col-md-4">
-                                <img src="{{ asset($d->cover) }}" class="card-img" style="height:100%; padding:10px; object-fit:cover">
+                                <img src="{{ asset($d->cover) }}" class="card-img" style="height:150px; padding:10px; object-fit:cover">
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
-                                    <h2 class="smalltitle title"><b> {{$d->name}} </b></h2>   
-                                    <label class="categorysug" style="margin-left:0">Food Category : 
+                                    <h2 class="smalltitle title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><b> {{$d->name}} </b></h2>   
+                                    <label class="categorysug" style="margin-left:0">Category : 
                                         @if($d->main_cat == "Food")
                                         {{$d->category}}
                                     @else

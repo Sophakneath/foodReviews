@@ -1,6 +1,6 @@
 @extends('adminMaster')
 
-@section('title', 'Advertisement')
+@section('title', 'Edit Article')
 
 @section('content')
 <style>

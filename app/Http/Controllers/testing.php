@@ -23,7 +23,7 @@ class testing extends Controller
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('posts.status','=','accepted')
                             ->leftJoin('saveFoods','posts.id','=','saveFoods.id','AND','saveFoods.reviewerID','=',$uid)
-                            ->orderBy('posts.date', 'desc')
+                            ->orderBy('posts.checked_at', 'desc')
                             ->get();
                             
       $tview = \DB::table('posts')
@@ -42,9 +42,9 @@ class testing extends Controller
                            ->where('posts.rating', '=', '5')
                            ->where('posts.status','=','accepted')
                            ->leftJoin('saveFoods','posts.id','=','saveFoods.id','AND','saveFoods.reviewerID','=',$uid)
-                           ->orderBy('posts.date', 'desc')->get();
+                           ->orderBy('posts.checked_at', 'desc')->get();
 
-      $restaurant = \DB::table('restaurants')->select('*')->where('status','=','active')->inRandomOrder()->orderBy('date', 'desc')->get();
+      $restaurant = \DB::table('restaurants')->select('*')->where('status','=','active')->inRandomOrder()->get();
 
       $article = \DB::table('article')->select('*')->where('status','=','active')->take(3)->get();
       
@@ -90,11 +90,10 @@ class testing extends Controller
       $postID = $request->input("postID");
       $name = $request->input("name");
       $data = \DB::table('posts')
-                            ->select('posts.*','dishes.*','users.username','posts.num_of_pp_rating')
+                            ->select('posts.*','dishes.*', 'users.id as reviewerID', 'users.username','users.image','posts.num_of_pp_rating')
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('posts.id','=',$postID)
-                           //  ->leftJoin('saveFoods','posts.id','=','saveFoods.id','AND','saveFoods.reviewerID','=',$uid)
                             ->get();
 
       $saves = \DB::table('saveFoods')
@@ -109,7 +108,7 @@ class testing extends Controller
                             ->join('dishes','dishes.dishID','=','posts.dishID')
                             ->join('users','users.id','=','posts.reviewerID')
                             ->where('posts.status','=','accepted')
-                            ->where('dishes.name','like','%'.$name.'%')
+                            ->where('dishes.ease_of_making','=','Easy')
                             ->inRandomOrder()
                             ->take(10)
                             ->get();
@@ -122,7 +121,7 @@ class testing extends Controller
                             ->get();
 
       $comment = \DB::table('comments')
-                           ->select('*')
+                           ->select('comments.*','users.image','users.username')
                            ->join('users','comments.reviewerID','=','users.id')
                            ->where('comments.postID','=',$postID)
                            ->orderBy('date','desc')
@@ -139,9 +138,53 @@ class testing extends Controller
          $click = $c->click_count;
          $click = $click+1;
          \DB::update("update posts set click_count='$click' where id = ?", [$postID]);
+
+         $reviewer = \DB::table('users')
+                     ->select('*')
+                     ->where('id','=',$c->reviewerID)
+                     ->get();
+
+         $food = \DB::table('posts')
+                     ->select('posts.*','dishes.*', 'users.id as reviewerID', 'users.username','users.image','posts.num_of_pp_rating')
+                     ->join('dishes','dishes.dishID','=','posts.dishID')
+                     ->join('users','users.id','=','posts.reviewerID')
+                     ->where('posts.status','=','accepted')
+                     ->where('dishes.main_cat','=','Food')
+                     ->where('posts.reviewerID','=',$c->reviewerID)
+                     ->get();
+
+         $drink = \DB::table('posts')
+                     ->select('posts.*','dishes.*', 'users.id as reviewerID', 'users.username','users.image','posts.num_of_pp_rating')
+                     ->join('dishes','dishes.dishID','=','posts.dishID')
+                     ->join('users','users.id','=','posts.reviewerID')
+                     ->where('posts.status','=','accepted')
+                     ->where('dishes.main_cat','=','Drink')
+                     ->where('posts.reviewerID','=',$c->reviewerID)
+                     ->get();
+
+         $dessert = \DB::table('posts')
+                     ->select('posts.*','dishes.*', 'users.id as reviewerID', 'users.username','users.image','posts.num_of_pp_rating')
+                     ->join('dishes','dishes.dishID','=','posts.dishID')
+                     ->join('users','users.id','=','posts.reviewerID')
+                     ->where('posts.status','=','accepted')
+                     ->where('dishes.main_cat','=','Dessert')
+                     ->where('posts.reviewerID','=',$c->reviewerID)
+                     ->get();
+                     
       }
 
-      return view('reviewDetail')->with('data',$data)->with('suggest', $suggest)->with('res', $res)->with('uid',$uid)->with('comments',$comment)->with('saves',$saves)->with('rate',$rate);
+      return view('reviewDetail')
+               ->with('data',$data)
+               ->with('suggest', $suggest)
+               ->with('res', $res)
+               ->with('uid',$uid)
+               ->with('comments',$comment)
+               ->with('saves',$saves)
+               ->with('rate',$rate)
+               ->with('reviewer',$reviewer)
+               ->with('food',$food)
+               ->with('drink',$drink)
+               ->with('dessert',$dessert);
    }
 
    function articleDetail(Request $request)
