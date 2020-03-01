@@ -320,7 +320,8 @@
                 <div class="row">
                     @foreach($res as $d)
                     <div class="col-lg-6" style="margin-top:20px;">
-                        <a href="{{$d->link}}" target="_blank" class="rev">
+                        <a href="{{$d->link}}" target="_blank" class="rev" onclick="clickCount('resID{{$d->restaurantID}}')">
+                            <input id="resID{{$d->restaurantID}}" hidden value="{{$d->restaurantID}}"/>
                             <div class="card" style="width: 100%; height:100%; box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.1);">
                                 <img class="card-img-top" src="{{ asset($d->image) }}" alt="Card image cap" style="height:110px; object-fit:cover;">
                                 <div class="card-body">
@@ -488,6 +489,25 @@
         c1.style.borderRadius = "10px"; 
         c2.style.boxShadow = "none"; 
         c3.style.boxShadow = "none"; 
+    }
+
+    function clickCount(resID)
+    {
+        // alert('abc');
+        var cid = document.getElementById(resID).value;
+
+        $.ajax({
+            type: 'get',
+            url: '/updateClickCount',
+            data:
+            {
+                id:cid
+            },
+            success:function(response)
+            {
+
+            }
+        });
     }
 
     var count = document.getElementById('count');

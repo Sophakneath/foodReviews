@@ -253,6 +253,25 @@
         cc.style.boxShadow = "none"; 
         c5.style.boxShadow = "none"; 
     }
+    
+    function clickCount(resID)
+    {
+        // alert('abc');
+        var cid = document.getElementById(resID).value;
+
+        $.ajax({
+            type: 'get',
+            url: '/updateClickCount',
+            data:
+            {
+                id:cid
+            },
+            success:function(response)
+            {
+
+            }
+        });
+    }
     </script>
 
     @endsection
