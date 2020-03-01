@@ -114,7 +114,7 @@
     @if(isset($_SESSION['success']))
         <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-bottom:20px;">
             @php
-                // echo $_SESSION['success'];
+                echo $_SESSION['success'];
             @endphp
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -656,39 +656,19 @@
                 <div class="row">
                     <div class="col-lg-6" style="margin-bottom:20px;">
                         <div class="coupon">
-                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <img src="{{asset('/img/unnamed.jpg')}}" alt="Avatar" style="object-fit:cover; width:100%; height:200px; padding:10px; border-radius: 10px;">
                             <div class="con" style="background-color:white">
-                              <h5><b>20% OFF FROM THE PIZZA COMPANY</b></h5> 
-                              <p>Redeem Your Reward With 200 Points.</p>
+                              <h5><b>10% OFF FROM TOUR LES JOURS</b></h5> 
+                              <p>Redeem Your Reward With 25 Points.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6" style="margin-bottom:20px;">
                         <div class="coupon">
-                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <img src="{{asset('/img/swensen.jpg')}}" alt="Avatar" style="object-fit:cover; width:100%; height:200px; padding:10px; border-radius: 10px;">
                             <div class="con" style="background-color:white">
-                              <h5><b>30% OFF FROM KOI THE CAMBODIA</b></h5> 
-                              <p>Redeem Your Reward With 300 Points.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6" style="margin-bottom:20px;">
-                        <div class="coupon">
-                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
-                            <div class="con" style="background-color:white">
-                              <h5><b>20% OFF FROM THE PIZZA COMPANY</b></h5> 
-                              <p>Redeem Your Reward With 200 Points.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6" style="margin-bottom:20px;">
-                        <div class="coupon">
-                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
-                            <div class="con" style="background-color:white">
-                              <h5><b>30% OFF FROM KOI THE CAMBODIA</b></h5> 
-                              <p>Redeem Your Reward With 300 Points.</p>
+                              <h5><b>20% OFF FROM SWENSEN CAMBODIA</b></h5> 
+                              <p>Redeem Your Reward With 50 Points.</p>
                             </div>
                         </div>
                     </div>
@@ -696,18 +676,38 @@
                 <div class="row">
                     <div class="col-lg-6" style="margin-bottom:20px;">
                         <div class="coupon">
-                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <img src="{{asset('/img/honey-green-tea.jpg')}}" alt="Avatar" style="object-fit:cover; width:100%; height:200px; padding:10px; border-radius: 10px;">
                             <div class="con" style="background-color:white">
-                              <h5><b>20% OFF FROM THE PIZZA COMPANY</b></h5> 
-                              <p>Redeem Your Reward With 200 Points.</p>
+                              <h5><b>1 HONEY GREEN TEA FROM KOI THE CAMBODIA</b></h5> 
+                              <p>Redeem Your Reward With 75 Points.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6" style="margin-bottom:20px;">
                         <div class="coupon">
-                            <img src="{{asset('/img/cover1.png')}}" alt="Avatar" style="width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <img src="{{asset('/img/burgerking.jpg')}}" alt="Avatar" style="object-fit:cover; width:100%; height:200px; padding:10px; border-radius: 10px;">
                             <div class="con" style="background-color:white">
-                              <h5><b>30% OFF FROM KOI THE CAMBODIA</b></h5> 
+                              <h5><b>1 CHICKEN BURGER SET FROM BURGER KING</b></h5> 
+                              <p>Redeem Your Reward With 100 Points.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" style="margin-bottom:20px;">
+                        <div class="coupon">
+                            <img src="{{asset('/img/santa.jpg')}}" alt="Avatar" style="object-fit:cover; width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <div class="con" style="background-color:white">
+                              <h5><b>30% OFF FROM SANTA FE CAMBODIA</b></h5> 
+                              <p>Redeem Your Reward With 160 Points.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-bottom:20px;">
+                        <div class="coupon">
+                            <img src="{{asset('/img/pizza.jpg')}}" alt="Avatar" style="object-fit:cover; width:100%; height:200px; padding:10px; border-radius: 10px;">
+                            <div class="con" style="background-color:white">
+                              <h5><b>50% OFF FROM THE PIZZA COMPANY</b></h5> 
                               <p>Redeem Your Reward With 300 Points.</p>
                             </div>
                         </div>

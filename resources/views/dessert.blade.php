@@ -58,7 +58,7 @@
     <br><br>
     <div class="row" style="margin:0">
         <div class="col-lg-12">
-            <h5 class="type title"> <b>FIND OUT MORE ABOUT THESE DRINK BY CATEGORY</b></h5>      
+            <h5 class="type title"> <b>FIND OUT MORE ABOUT THESE DESSERT & BAKE BY CATEGORY</b></h5>      
         </div>    
     </div>
     <br><br>
@@ -66,31 +66,31 @@
         <ul class="swipetabnav nav  nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" style="overflow-x: auto;">
                 <li class="nav-item" style="margin:10px;" onclick="changeState('all','coo','cake','cho','ice')">
                     <div class="item slidecat" id="all" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-hea" aria-selected="true">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/healthy-food.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/dessert.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">All D&B</label>
                     </div>
                 </li>
                 <li class="nav-item" style="margin:10px;" onclick="changeState('coo','all','cake','cho','ice')">
                     <div class="item slidecat" id="coo" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-veg-tab" data-toggle="pill" href="#pills-veg" role="tab" aria-controls="pills-veg" aria-selected="false">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/fruit.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/cookie.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Cookie</label>
                     </div>
                 </li>
                 <li class="nav-item" style="margin:10px;" onclick="changeState('cake','all','coo','cho','ice')">
                     <div class="item slidecat" id="cake" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-meat-tab" data-toggle="pill" href="#pills-meat" role="tab" aria-controls="pills-meat" aria-selected="false">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/steak.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/cake.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Cake</label>
                     </div>
                 </li>
                 <li class="nav-item" style="margin:10px;" onclick="changeState('cho','all','coo','cake','ice')">
                     <div class="item slidecat" id="cho" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-hea-tab" data-toggle="pill" href="#pills-hea" role="tab" aria-controls="pills-on" aria-selected="false">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/salad.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/chocolate.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Chocolate</label>
                     </div>
                 </li>
                 <li class="nav-item" style="margin:10px;" onclick="changeState('ice','all','coo','cake','cho')">
                     <div class="item slidecat" id="ice" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-spi-tab" data-toggle="pill" href="#pills-spi" role="tab" aria-controls="pills-spi" aria-selected="false">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/salad.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/ice.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Ice Cream</label>
                     </div>
                 </li>
@@ -193,7 +193,7 @@
 
     <div class="row" style="margin:0">
         <div class="col-lg-12">
-            <h5 class="type title"> <b>TOP VIEW DRINK</b></h5>      
+            <h5 class="type title"> <b>TOP VIEW  DESSERT & BAKE</b></h5>      
         </div>    
     </div>    
     <br><br>
@@ -215,7 +215,7 @@
 
     <div class="row" style="margin:0">
         <div class="col-lg-12">
-            <h5 class="type title"> <b>TOP RATING DRINK</b></h5>      
+            <h5 class="type title"> <b>TOP RATING  DESSERT & BAKE</b></h5>      
         </div>    
     </div>  
     <br><br>

@@ -16,7 +16,7 @@
                             <img src="{{ asset($d->image) }}" alt="" style="width:100%; height:130px; object-fit:cover;">
                         </div>
                         <div class="col-lg-6 col-sm-12 col-12 col-md-6" style="padding-top:25px; padding-bottom:25px;">
-                            <h2 class="smalltitle title"><b> {{$d->name}}</b></h2>   
+                            <h2 class="smalltitle title"><b style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"> {{$d->name}}</b></h2>   
                             
                             @if($d->status == "Active")
                                 <img src="{{ asset('img/icons/correct.png') }}" style="width:25px; height:25px;">

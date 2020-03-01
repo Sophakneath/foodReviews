@@ -205,7 +205,7 @@ class Admin extends Controller
 
         $item = \DB::table('restaurants')
                 ->select('restaurants.*')
-                ->where('name', 'like', $name.'%')
+                ->where('name', 'like', '%'.$name.'%')
                 ->where('status','=','Active')
                 ->orderby('date','asc')
                 ->get();
@@ -225,7 +225,7 @@ class Admin extends Controller
 
         $item = \DB::table('restaurants')
                 ->select('restaurants.*')
-                ->where('name', 'like', $name.'%')
+                ->where('name', 'like', '%'.$name.'%')
                 ->where('status','=','Inactive')
                 ->orderby('date','asc')
                 ->get();
@@ -248,7 +248,7 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','pending')
-                ->where('name', 'like', $name.'%')
+                ->where('name', 'like', '%'.$name.'%')
                 ->orderBy('posts.date', 'asc')
                 ->get();
 
@@ -270,7 +270,7 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','accepted')
-                ->where('name', 'like', $name.'%')
+                ->where('name', 'like', '%'.$name.'%')
                 ->orderBy('posts.date', 'asc')
                 ->get();
 
@@ -292,7 +292,7 @@ class Admin extends Controller
                 ->join('dishes','dishes.dishID','=','posts.dishID')
                 ->join('users','users.id','=','posts.reviewerID')
                 ->where('posts.status','=','rejected')
-                ->where('name', 'like', $name.'%')
+                ->where('name', 'like', '%'.$name.'%')
                 ->orderBy('posts.date', 'asc')
                 ->get();
 
@@ -338,7 +338,7 @@ class Admin extends Controller
 
         $item = \DB::table('article')
                 ->select('*')
-                ->where('name', 'like', $name.'%')
+                ->where('name', 'like', '%'.$name.'%')
                 ->where('status','=','Active')
                 ->orderby('created_at','asc')
                 ->get();
@@ -358,7 +358,7 @@ class Admin extends Controller
 
         $item = \DB::table('article')
                 ->select('*')
-                ->where('name', 'like', $name.'%')
+                ->where('name', 'like', '%'.$name.'%')
                 ->where('status','=','Inactive')
                 ->orderby('created_at','asc')
                 ->get();

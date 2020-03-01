@@ -192,7 +192,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-7 col-7 offset-md-2 offset-1">
-                                <input class="input form-control" id="active" type="text" placeholder=" Search by name">
+                                <input class="input form-control" id="ac" type="text" placeholder=" Search by name">
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-3 col-3">
                                 <button class="btn btn-danger" style="width:100%" onclick="searchActive()">Search</button>
@@ -209,7 +209,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-7 col-7 offset-md-2 offset-1">
-                                <input class="input form-control" id="inactive" type="text" placeholder=" Search by name" style="">
+                                <input class="input form-control" id="iac" type="text" placeholder=" Search by name" style="">
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-3 col-3">
                                 <button class="btn btn-danger" style="width:100%" onclick="searchInactive()">Search</button>
@@ -349,7 +349,7 @@
     function searchActive()
     {
         // alert('abc');
-        var n = document.getElementById('active').value;
+        var n = document.getElementById('ac').value;
 
         $.ajax({
             type: 'get',
@@ -368,7 +368,7 @@
     function searchInactive()
     {
         // alert('abc');
-        var n = document.getElementById('inactive').value;
+        var n = document.getElementById('iac').value;
 
         $.ajax({
             type: 'get',

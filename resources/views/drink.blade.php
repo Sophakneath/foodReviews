@@ -67,31 +67,31 @@
         <ul class="swipetabnav nav  nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist" style="overflow-x: auto;">
                 <li class="nav-item" style="margin:10px;" onclick="changeState('all','smo','ju','ene','alc')">
                     <div class="item slidecat" id="all" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-hea" aria-selected="true">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/healthy-food.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/beverage.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">All Drink</label>
                     </div>
                 </li>
                 <li class="nav-item" style="margin:10px;" onclick="changeState('smo','all','ju','ene','alc')">
                     <div class="item slidecat" id="smo" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-veg-tab" data-toggle="pill" href="#pills-veg" role="tab" aria-controls="pills-veg" aria-selected="false">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/fruit.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/smoothie.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Smoothie</label>
                     </div>
                 </li>
                 <li class="nav-item" style="margin:10px;" onclick="changeState('ju','all','smo','ene','alc')">
                     <div class="item slidecat" id="ju" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-meat-tab" data-toggle="pill" href="#pills-meat" role="tab" aria-controls="pills-meat" aria-selected="false">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/steak.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/juice.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Juice</label>
                     </div>
                 </li>
                 <li class="nav-item" style="margin:10px;" onclick="changeState('ene','all','smo','ju','alc')">
                     <div class="item slidecat" id="ene" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-hea-tab" data-toggle="pill" href="#pills-hea" role="tab" aria-controls="pills-on" aria-selected="false">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/salad.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/energy.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Energy Drink</label>
                     </div>
                 </li>
                 <li class="nav-item" style="margin:10px;" onclick="changeState('alc','all','smo','ju','ene')">
                     <div class="item slidecat" id="alc" style="padding-left:20px; padding-right:20px;  width:200px;" id="pills-spi-tab" data-toggle="pill" href="#pills-spi" role="tab" aria-controls="pills-spi" aria-selected="false">
-                        <span class="logohelper"></span><img src="{{ asset('img/icons/salad.png') }}" style="width:40px; display:inline-block;">
+                        <span class="logohelper"></span><img src="{{ asset('img/icons/alcoholic.png') }}" style="width:40px; display:inline-block;">
                         <label class="categorysug">Alcoholic</label>
                     </div>
                 </li>
