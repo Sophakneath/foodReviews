@@ -1,6 +1,6 @@
 This project use laravel framework.
 
-We have included the database file name "foodreview.sql", and also the powerpoint slide in the project folder.
+We have included the database file name "foodreview.sql" in the project folder.
 
 So in order to run this project:
     - We need to import the sql file in the database mysql
